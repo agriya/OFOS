@@ -1,0 +1,68 @@
+<div class="section navbar-default">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb navbar-btn">
+                    <li> <a href="/">{{'Home'|translate}}</a> </li>
+                    <li class="active">{{'Account Settings'|translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section navbar-default">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-md-8 col-lg-9 navbar-btn">
+                <div class="section navbar-default" ng-controller='UsersSettingsController as vm'>
+                    <div class="panel" ng-show="!vm.loader">
+                        <div class="panel-heading sep-bot">
+                            <h3 style="display:inline;">{{'Account Settings'|translate}}</h3>
+                        </div>
+                        <div class="panel-heading">
+                            <form class="form-horizontal adminpg-form" role="form" name="vm.userSettings" ng-submit="vm.save()">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-4"> <label for="inputFirstName3" class="control-label required">{{'First name'|translate}}<span class="text-danger">&nbsp;*</span></label></div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.usersSettings.first_name" pattern="[a-zA-Z]+" title="{{'Only enter letters'|translate}}"
+                                                class="form-control" id="inputFirstName3" autocomplete="off" required> </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-4"> <label for="inputLastName3" class="control-label required">{{'Last name'|translate}}<span class="text-danger">&nbsp;*</span></label></div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.usersSettings.last_name" pattern="[a-zA-Z]+" title="{{'Only enter letters'|translate}}"
+                                                class="form-control" required="required" id="inputLastName3" autocomplete="off"
+                                                required> </div>
+                                    </div>
+                                </div>
+                                <div class="form-group no-mar">
+                                    <div class="row">
+                                        <div class="col-sm-4"> <label for="inputMobile3" class="control-label required">{{'Mobile'|translate}}<span class="text-danger">&nbsp;*</span></label>                                            </div>
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-lg-3 col-xs-12"><select class="form-control" name="mobile_code_country_id" id="mobile_code" ng-model="vm.usersSettings.mobile_code_country_id" required>
+                                                        <option ng-selected="vm.usersSettings.mobile_code_country_id == country.id" ng-repeat="country in vm.countries" ng-value="country.id">{{country.phone}}</option></select>
+                                                </div>
+                                                <div class="col-sm-12 col-lg-9 col-xs-12 no-pad"> <input type="text" ng-model="vm.usersSettings.mobile"  title="{{'Please enter valid mobile no'|translate}}"
+                                                        class="form-control" id="inputMobile3" autocomplete="off" required="require"> </div>
+                                            </div>
+                                            <p class="instruction help-block">{{'We will send you order confirmations on this number'|translate}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-offset-4 col-sm-8"> <button type="submit" ng-show="vm.save_btn" class="btn textb btn-primary disabled">{{'Save'|translate}}</button>                                        <button type="submit" ng-show="!vm.save_btn" class="btn textb btn-primary">{{'Save'|translate}}</button>                                        </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="loader-wrapper" ng-if="vm.loader" ng-include="'views/loader.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

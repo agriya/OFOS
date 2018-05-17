@@ -1,0 +1,35 @@
+<table class="table table-striped  table-hover table-bordered">
+    <tbody>
+        <tr >
+            <th class="bold" width="10%">S.No</th>
+            <th class="bold" width="20%">Menu Name</th>
+            <th class="bold" width="10%">Quantity</th>
+            <th class="bold " width="20%">Price</th>
+            <th class="bold text-right" width="20%">Total Price</th>
+        </tr>
+        <tr  ng-repeat="order_item in order.order_items">
+            <td >{{$index+1}}</td>
+            <td >{{order_item.restaurant_menu.name}}
+                <td>{{order_item.quantity}}</td>
+                <td>{{currency}}{{order_item.restaurant_menu_price.price}}</td>
+                <td class="padright75 text-right">{{currency}}{{order_item.quantity * order_item.restaurant_menu_price.price}}</td>
+        </tr>
+        <tr >
+            <td class="text-right" align="right" colspan="4">Sub Total</td>
+            <td align="right" class=" text-right padright75">{{currency}}{{sub_total}}</td>
+        </tr>
+        <tr >
+            <td class="text-right" align="right" colspan="4">Tax({{order.sales_tax}} %)</td>
+            <td align="right" class="text-right padright75">{{currency}}{{sales_tax}}</td>
+        </tr>
+        <tr >
+            <td class=" text-right" align="right" colspan="4">Delivery fee</td>
+            <td ng-show="order.delivery_charge !== '0'" align="right" class="text-right padright75">{{currency}}{{order.delivery_charge}}</td>
+            <td ng-show="order.delivery_charge === '0'" align="right" class="text-left padright75">{{'Free'|translate}}</td>
+        </tr>
+        <tr >
+            <td class="text-right" align="right" colspan="4">Total</td>
+            <td align="right" class=" text-right padright75">{{currency}}{{order.total_price}}</td>
+        </tr>
+    </tbody>
+</table>

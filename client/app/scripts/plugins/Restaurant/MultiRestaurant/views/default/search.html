@@ -1,0 +1,160 @@
+<div class="cover-image search-cover-image search-cover-image-bg-{{vm.randomImageClass}}">
+    <div class="container-fluid">
+        <div class="row" ng-show="!vm.search_box">
+            <div class="col-md-12 text-center fa-inverse">
+                <h2 class="space">{{'Order takeaway online'|translate}}</h2>
+                <p class="top-space text-18">{{'Choose from over 20,000 takeaways'|translate}}</p> <br> </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-sm-11 float-none center-block">
+                <form class="form-normal" role="form" ng-show="!vm.search_box">
+                    <div class="search"> <span><i class="fa fa-map-marker fa-lg"></i></span> <input type="text" class="form-control" g-places-autocomplete
+                            force-selection="true" ng-model="vm.place" placeholder="{{'Enter your location or area'|translate}}">                        </div>
+                    <div class="search-btn">
+                        <input type="submit" ng-class="{'disabled': !vm.place}" ng-click="vm.show_retaurants()" class="btn btn-success disabled"
+                            value="{{'Find takeaways'|translate}}" /> </div>
+                </form> <span class="text-center fa-inverse" ng-show="vm.search_box">
+                    <h4 class="mt35">{{'Order from'|translate}} <span class="text-success">{{vm.totalItems}}</span> {{'shops
+                delivering to your door'|translate}}</h4>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li><a href="/">{{'Home'|translate}}</a> </li>
+            <li class="active">{{'Shops'|translate}} </li>
+        </ol>
+    </div>
+</div>
+<div class="section view-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel left-view">
+                    <h5 class="space text-uppercase">{{'Refine'|translate}}</h5>
+                    <ol class="list-unstyled sort-list">
+                        <li class="clearfix">
+                            <div class="no-mar pull-left">{{'Sort by'|translate}}:&nbsp;<span ng-if="vm.currentSort == 'distance'">{{'Distance'|translate}}</span>
+                                <span ng-if="vm.currentSort == 'latest'">{{'Newest first'|translate}}</span><span ng-if="vm.currentSort == 'name'">{{'Shop name'|translate}}</span>                                <span ng-if="vm.currentSort == 'rating'">{{'User rating'|translate}}</span> </h3>
+                            </div><span class="pull-right"></span></li>
+                        <li class="clearfix"><span class="text-right cur" ng-class="{'font800' : vm.currentSort == 'distance'}" id="distance"
+                                ng-model="distance" ng-click="vm.sort('distance')">{{'Distance'|translate}}</span> </li>
+                        <li > <span class="text-right cur" ng-class="{'font800' : vm.currentSort == 'latest'}" id="latest" ng-model="latest"
+                                ng-click="vm.sort('latest')">{{'Newest first'|translate}}</span> </li>
+                        <li > <span class="text-right cur" ng-class="{'font800' : vm.currentSort == 'name'}" id="name" ng-model="name"
+                                ng-click="vm.sort('name')">{{'Shop name'|translate}}</span> </li>
+                        <li > <span class="text-right cur" ng-class="{'font800' : vm.currentSort == 'rating'}" id="rating" ng-model="rating"
+                                ng-click="vm.sort('rating')">{{'User rating'|translate}}</span> </li>
+                    </ol>
+                    <hr class="navbar-btn list-group-item-heading">
+                    <ol class="list-unstyled">
+                        <li class="well-sm">
+                            <h5 class="no-mar">{{'Specialities'|translate}}</h5>
+                        </li>
+                        <li class="checkbox clearfix" ng-repeat="cuisine in vm.cuisines"> <label class="pull-left">								
+								<input type="checkbox" id="checkbox{{$index}}" ng-click="vm.sort()" ng-model="vm.cuisinesSort[cuisine.id]">								
+								<span title="{{cuisine.name}}">{{cuisine.name}}</span>								
+							</label> </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="thumbnail clearfix">
+                    <div class="col-md-12 clearfix">
+                        <span class="pull-left">
+                            <form ng-submit="vm.find()"> <input type="text" class="restaurant-search" placeholder="{{'Search by shop name'|translate}}" class="form-control" ng-model="vm.q" id="user_search"></form>
+                            </span>
+                        <span class="location" ng-click="vm.search_box = ! vm.search_box"><i class="fa fa-map-marker fa-fw grayc"></i> {{'Change location?'|translate}}</span>
+                    </div>
+                    <div class="pull-right"><span class="btn btn-link" ng-click="vm.showList = true;vm.showMap = false;"> <i class="fa fa-list" aria-hidden="true"></i> </span>
+                        <span class="btn btn-link" ng-click="vm.showList = false;vm.showMap = true;"> <i class="fa fa-map-marker" aria-hidden="true"></i> </span>
+                    </div>
+                    <div class="col-md-12" ng-if="vm.showList">
+                        <div class="clearfix" ng-show="!vm.loader">
+                            <ul class="media-list">
+                                <li class="media" ng-repeat="restaurant in vm.restaurants">
+                                    <a class="txt-dec clearfix" href="restaurant/{{restaurant.id}}/{{restaurant.slug}}">
+                                        <div class="pull-left"> <img class="pull-left media-object" ng-src="{{restaurant.image_name}}" title="{{restaurant.name}}"
+                                                height="100" width="100"> </div>
+                                        <div class="media-body restaurant-list col-sm-9"> <span class="clearfix show"><h5 class="pull-left no-mar" title="{{restaurant.name}}">{{restaurant.name}}</h5> <span ng-if="restaurant.open" class="text-primary list-group-item-heading pull-left pl20"> <small>{{'Opens at'|translate}}  {{restaurant.open}}</small> </span></span>
+                                            <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="restaurant.is_closed === 0 && restaurant.is_allow_users_to_preorder === 0">{{'Order'|translate}}</p>
+                                            <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="restaurant.is_closed === 1 && restaurant.is_allow_users_to_preorder === 1">{{'Preorder'|translate}}</p>
+                                            <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="restaurant.is_closed === 1 && restaurant.is_allow_users_to_preorder === 0">{{'View Menu'|translate}}</p>
+                                            <p class="list-group-item-text"><span ng-repeat="cuisine in restaurant.restaurant_cuisine | limitTo : 6">{{($index != 0) ? ', ' + cuisine.cuisine.name : cuisine.cuisine.name}}</span>
+                                                <span class="cur" ng-show="restaurant.restaurant_cuisine.length > 6" ng-click="show_more = ! show_more">
+                                                View more</span>
+                                                <select
+                                                    class="form-control col-md-3" ng-show="restaurant.restaurant_cuisine.length > 6 && show_more"
+                                                    class="form-control" ng-model="vm.cuisines" ng-options="cuisine.cuisine.id as cuisine.cuisine.name for cuisine in restaurant.restaurant_cuisine | limitTo : (restaurant.restaurant_cuisine.length - 6) : 6"></select>
+                                            </p>
+                                            <p class="list-group-item-text"> <i class="fa fa-map-marker"></i> &nbsp; <span ng-hide="restaurant.address === null">{{restaurant.address}}</span>
+                                                <span ng-hide="restaurant.address1 === '' || restaurant.address1 === null">, {{restaurant.address1}}</span>                                                <span ng-hide="restaurant.city === null">, {{restaurant.city.name}}</span>                                                </p>
+                                            <p class="list-group-item-text amount"> <span><i class="fa fa-motorcycle fa-fw fa-lg"></i> {{'Delivery fee'|translate}} <span ng-show="restaurant.delivery_charge !== '0'">{{restaurant.delivery_charge | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                                                <span ng-show="restaurant.delivery_charge === '0'">: {{'Free'|translate}}</span>                                                </span> <span><i class="fa fa-money fa-fw fa-lg"></i> {{'Min. order'|translate}} - {{restaurant.minimum_order_for_booking | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}  </span><span><i class="fa fa-clock-o fa-fw fa-lg"></i> {{'Delivers in'|translate}} {{restaurant.estimated_time_to_delivery}} {{'min'|translate}}</span>                                                <span>
+                                                    <i ng-repeat='rating in vm.maxRatings track by $index'>
+                                                        <i class="fa fa-star text-warning" ng-class="((rating < restaurant.rating_round)? 'fa-star':((((restaurant.rating_point - rating) > 0) && ((restaurant.rating_point - rating) < 1))
+                                                        ? 'fa-star-half': 'fa-star-o'))"></i>
+                                                    </i>                                                  
+                                                </span> </p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--Ending here-->
+                </div>
+                <div class="alert alert-danger" ng-show="!vm.restaurants.length" ng-if="!vm.loader">
+                     <p class="text-center">{{'No Shops Found'|translate}}</p>
+                </div>
+                <!--Map List Starts here-->
+                <div ng-if="vm.showMap">
+
+                    <ng-map class="map" scrollwheel="true" default-style="false" center="{{vm.mapCenter}}" zoom="16">
+                        <marker id='{{restaurant.hash}}' position="{{restaurant.latitude}},{{restaurant.longitude}}" ng-repeat="restaurant in vm.restaurants"
+                            on-click="vm.showDetail(restaurant)" icon="images/restaurant.ico">
+                        </marker>
+
+                        <info-window id="foo-iw" style="font-size:xx-large">
+                            <div ng-non-bindable="">
+                                <a class="txt-dec clearfix" href="restaurant/{{restaurant.id}}/{{restaurant.slug}}">
+                                    <div class="pull-left"> <img class="pull-left media-object" ng-src="{{restaurant.image_name}}" title="{{restaurant.name}}"
+                                            height="50" width="50"> </div>
+                                    <div class="media-body restaurant-list col-sm-9"> <span class="clearfix show"><h6 class="pull-left no-mar" title="{{restaurant.name}}">{{restaurant.name}}</h6> <span ng-if="restaurant.open" class="text-primary list-group-item-heading pull-left pl20"> <small>{{'Opens at'|translate}}  {{restaurant.open}}</small> </span></span>
+                                        <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="restaurant.is_closed === 0 && restaurant.is_allow_users_to_preorder === 0">{{'Order'|translate}}</p>
+                                        <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="restaurant.is_closed === 1 && restaurant.is_allow_users_to_preorder === 1">{{'Preorder'|translate}}</p>
+                                        <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="restaurant.is_closed === 1 && restaurant.is_allow_users_to_preorder === 0">{{'View Menu'|translate}}</p>
+                                        <p class="list-group-item-text"><span ng-repeat="cuisine in restaurant.restaurant_cuisine | limitTo : 6">{{($index != 0) ? ', ' + cuisine.cuisine.name : cuisine.cuisine.name}}</span>
+                                            <span class="cur" ng-show="restaurant.restaurant_cuisine.length > 6" ng-click="show_more = ! show_more">
+                                            View more</span> <select class="form-control col-md-3"
+                                                ng-show="restaurant.restaurant_cuisine.length > 6 && show_more" class="form-control"
+                                                ng-model="vm.cuisines" ng-options="cuisine.cuisine.id as cuisine.cuisine.name for cuisine in restaurant.restaurant_cuisine | limitTo : (restaurant.restaurant_cuisine.length - 6) : 6"></select></p>
+                                        <p class="list-group-item-text"> <i class="fa fa-map-marker"></i> &nbsp; <span ng-hide="restaurant.address === null">{{restaurant.address}}</span>
+                                            <span ng-hide="restaurant.address1 === '' || restaurant.address1 === null">, {{restaurant.address1}}</span>                                            <span ng-hide="restaurant.city === null">, {{restaurant.city.name}}</span> </p>
+                                        <p class="list-group-item-text amount"> <span><i class="fa fa-motorcycle fa-fw fa-lg"></i> {{'Delivery fee'|translate}} <span ng-show="restaurant.delivery_charge !== '0'">{{restaurant.delivery_charge | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                                            <span ng-show="restaurant.delivery_charge === '0'">: {{'Free'|translate}}</span>                                            </span> <span><i class="fa fa-money fa-fw fa-lg"></i> {{'Min. order'|translate}} - {{restaurant.minimum_order_for_booking | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}  </span><span><i class="fa fa-clock-o fa-fw fa-lg"></i> {{'Delivers in'|translate}} {{restaurant.estimated_time_to_delivery}} {{'min'|translate}}</span>                                            <span>
+                                                    <i ng-repeat='rating in vm.maxRatings track by $index'>
+                                                        <i class="fa fa-star text-warning" ng-class="((rating < restaurant.rating_round)? 'fa-star':((((restaurant.rating_point - rating) > 0) && ((restaurant.rating_point - rating) < 1))
+                                                        ? 'fa-star-half': 'fa-star-o'))"></i>
+                                                    </i>                                                  
+                                                </span> </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </info-window>
+                    </ng-map>
+                </div>
+                <!--Map List Ends Here-->
+            </div>
+            <div class="row" ng-show="!vm.loader" ng-if="vm.showList">
+                <div class="col-md-12 text-center" ng-hide="(vm.restaurants.length > vm.itemsPerPage) && vm.currentPage==1">
+                    <uib-pagination ng-hide="!vm.restaurants.length" previous-text="Previous" next-text="Next" total-items="vm.totalItems" num-pages="numPages"
+                        ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"
+                        items-per-page="vm.itemsPerPage" ng-change="vm.paginate()"></uib-pagination>
+                </div>
+            </div>
+           <div class="loader-wrapper" ng-if="vm.loader" ng-include="'views/loader.html'"></div>
+        </div>
+    </div>
+</div>

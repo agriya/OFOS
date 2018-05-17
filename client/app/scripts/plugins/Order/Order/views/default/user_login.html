@@ -1,0 +1,23 @@
+<div class="section" ng-controller='UsersLoginController as vm'>    
+    <form class="form-horizontal user-ascess-form" role="form" name="vm.userLogin" ng-submit="vm.save()">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group"> 
+                    <input type="text" ng-model="vm.user.username" class="form-control" id="userName" placeholder="{{'User Name'|translate}}" autocomplete="off" required> 
+                </div>
+                <div class="form-group"> 
+                    <input type="password" ng-model="vm.user.password" class="form-control" id="inputPassword3" placeholder="{{'Password'|translate}}" autocomplete="off" required> 
+                </div>
+                <div class="form-group">
+                    <div class="checkbox pull-left"> 
+                        <label><input type="checkbox"><span class="left-space">{{'Remember me'|translate}}</span></label> 
+                    </div>
+                    <p class="pull-right"><a href="users/forgot_password">{{'Forgot password'|translate}}</a></p>
+                </div>
+                <div class="form-group"> <button type="submit" ng-show="vm.save_btn" class="btn btn-block btn-primary disabled">{{'Log in'|translate}}</button> <button type="submit" ng-show="!vm.save_btn" class="btn btn-block btn-primary">{{'Log in'|translate}}</button>                                </div>
+                <div class="pr sep-top reg-or-blk" ng-show="vm.providers.length > 0"><span class="cls_slogin_or_blk pa">{{'OR'|translate}}</span></div>
+                <div class="form-group"> <a ng-repeat="provider in vm.providers" data-provider="{{provider.name}}" ng-click="vm.authenticate(provider.slug)" class="btn btn-block btn-social {{provider.button_class}}"><span class="fa {{provider.icon_class}}"></span>{{'Login with'|translate}} {{provider.name}}</a>                                </div>
+            </div>
+        </div>
+    </form>           
+</div>

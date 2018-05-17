@@ -1,0 +1,10 @@
+{
+	"name": "Translation", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "Translation",
+	"dependencies": "Common",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "16",
+	"plugin_name":"Common/Translation"
+}

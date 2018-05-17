@@ -1,0 +1,72 @@
+{
+  "name": "ofos",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "1.5.2",
+    "angular-resource": "1.5.2",
+    "angular-sanitize": "1.5.2",
+    "angular-animate": "1.5.2",
+    "angular-cookies": "1.5.7",
+    "bootstrap": "~3.3",
+    "angular-bootstrap": "~1.3.2",
+    "angular-ui-router": "~0.2.13",
+    "ng-admin": "1.0.0-alpha4",
+    "satellizer": "~0.14.0",
+    "angular-md5": "^0.1.10",
+    "angular-growl-v2": "~0.7.5",
+    "angular-google-places-autocomplete": "^0.2.7",
+    "angular-filter": "^0.5.8",
+    "angular-ui-select2": "^0.0.5",
+    "angular-http-auth": "^1.3.0",
+    "bootstrap-ui-datetime-picker": "^2.4.0",
+    "angular-recaptcha": "^3.0.3",
+    "angulartics": "^1.0.0",
+    "angulartics-google-analytics": "^0.2.0",
+    "angular-translate": "^2.11.0",
+    "angular-translate-loader-static-files": "^2.11.0",
+    "angular-dynamic-locale": "^0.1.32",
+    "angular-translate-handler-log": "^2.11.0",
+    "angular-translate-storage-cookie": "^2.11.0",
+    "angular-translate-storage-local": "^2.11.0",
+    "angular-i18n": "^1.5.7",
+    "ngmap": "^1.17.6",
+    "angular-loading-bar": "^0.9.0",
+    "angular-payment": "*",
+    "angular-ui-sortable": "^0.14.3",
+    "malihu-custom-scrollbar-plugin": "3.1.5",
+    "Chart.js": "~1.0.2",
+    "amcharts": "~3.15.2",
+    "amcharts-stock": "*",
+    "angular-morris-chart": "~1.1.0",
+    "jquery": "~2.1.4",
+    "jquery-ui": "~1.11.4",
+    "jquery.easing": "~1.3.1",
+    "jquery.easy-pie-chart": "~2.1.6",
+    "angular-chart.js": "~0.8.8",
+    "angular-chartist.js": "~3.3.12",
+    "chartist": "0.9.5",
+    "angular-slimscroll": "~1.1.5",
+    "ammap": "~3.14.5",
+    "ui-select": "angular-ui/ui-select#271bf6a03078587c5afdb05f61e826573a13d348",
+    "angular-deferred-bootstrap": "^0.1.9",
+    "sweetalert2": "^6.9.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.5.2"
+  },
+  "resolutions": {
+    "angular": ">=1.5.2",
+    "angular-bootstrap": ">=1.3.2"
+  },
+  "appPath": "app",
+  "moduleName": "ofosApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}

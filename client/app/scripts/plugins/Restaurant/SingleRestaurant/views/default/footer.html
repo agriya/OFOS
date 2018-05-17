@@ -1,0 +1,51 @@
+<footer class="footer">
+    <div class="footer-section navbar-inverse">
+        <div class="container">
+            <div class="row navbar-btn footer-block">
+                <div class="col-md-offset-2 col-md-3 col-sm-3 footer-list">
+                    <h5> {{'Shops'|translate}}</h5>
+                    <div class="border-line"></div>
+                    <footer-Restaurants></footer-Restaurants>
+                </div>
+                <div class="col-sm-3 footer-list">
+                    <h5>{{'A bit more about us'|translate}}</h5>
+                    <div class="border-line-last"></div>
+                    <pages></pages>
+                </div>
+                <div class="col-sm-4 pull-left">
+                    <div class="payment clearfix">
+                        <h5>{{'payment methods'|translate}}</h5>
+                        <ul class="list-inline">
+                            <li> <img alt="[Image: Visa]" title="Visa" src="images/je-payment-logos-visa.png"> </li>
+                            <li> <img alt="[Image: Master Card]" title="Master Card" src="images/je-payment-logos-mastercard.png"> </li>
+                            <li> <img alt="[Image: Amex]" title="Amex" src="images/american-express.png"> </li>
+                        </ul>
+                    </div>
+                    <div class="social-block clearfix">
+                        <h5 class="text-uppercase no-mar">{{'Follow us on'|translate}}</h5>
+                        <ul class="list-inline">
+                            <li class="facebook">
+                                <a href="{{settings.SITE_FACEBOOK_URL}}" target="_blank" title="facebook"> <span class="fa-border">                                      
+                                      <i class="fa fa-facebook fa-lg"></i>
+                                    </span> </a>
+                            </li>
+                            <li class="twitter">
+                                <a href="{{settings.SITE_TWITTER_URL}}" target="_blank" title="twitter"> <span class="fa-border">                                     
+                                        <i class="fa fa-twitter fa-lg"></i>
+                                    </span> </a>
+                            </li>
+                            <li class="youtube">
+                                <a href="{{settings.SITE_YOUTUBE_URL}}" target="_blank" title="Youtube"> <span class="fa-border">                                     
+                                        <i class="fa fa fa-youtube fa-lg"></i>
+                                    </span> </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copy-right text-center">
+                <p> &copy; {{cdate | date:'yyyy'}} {{settings.SITE_NAME}}. {{'All rights reserved'|translate}}.</p>
+            </div>
+        </div>
+    </div>
+</footer>

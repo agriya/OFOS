@@ -1,0 +1,30 @@
+<div class="container" ng-show="vmy.carts.length">
+    <div class="col-md-12">
+        <ul class="list-inline list-example text-center">
+            <li class="active">
+                <div class="show"><a href=""><span class="badge">1</span></a></div><span>{{'Your Details'|translate}}</span></li>
+            <li>
+                <div class="show"><a href=""><span class="badge">2</span></a></i>
+                </div><span>{{'Review Order'|translate}}</span></li>
+            <li>
+                <div class="show"><a href=""><span class="badge">3</span></a></div><span>{{'Place Order'|translate}}</span></li>
+        </ul>
+    </div>
+    <div class="well-lg"></div>
+    <h4 class="text-center mt35"><strong>{{'Log in or Register to order'|translate}}</strong></h4>
+    <div class="well-sm"></div>
+    <div class="row">
+        <div class="col-md-6 panel navbar-btn col-md-offset-3">
+            <ul class="media-list navbar-btn">
+                <li class="media well-sm">
+                    <a class="pull-left" href=""><img ng-src="{{vmy.restaurant.image_name}}" height="100" width="100" class="media-object"></a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{vmy.restaurant.name}}</h4><br/>
+                        <h5 class="pull-left text-hash pr25"><strong>{{'Order total'|translate}}: {{vmy.total | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</strong></h5>
+                        <h5 class="pull-left text-hash pr25"><strong><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i></strong></h5>
+                        <h5 class="pull-left"><a class="text-hash pull-left txt-dec" href="restaurant/{{vmy.restaurant.id}}/{{vmy.restaurant.slug}}"><strong>{{'Back to restaurant'|translate}}</strong></a></h5>
+                        <br/> </li>
+            </ul>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,10 @@
+{
+	"name": "OwnDelivery", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "OwnDelivery",
+	"dependencies": "Order",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "6",
+	"plugin_name":"Order/OwnDelivery"
+}

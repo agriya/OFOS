@@ -1,0 +1,42 @@
+<div class="navbar-default" ng-controller="RestaurantTimingCtrl">
+    <div ng-show="restaurant_id">
+        <form class="form-horizontal" role="form" name="restaurantTimingForm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Day <button class="btn btn-info btn-xs" ng-click="setAll()">Set all</button></th>
+                        <th colspan="2" class="text-center">Breakfast</th>
+                        <th colspan="2" class="text-center">Lunch</th>
+                        <th colspan="2" class="text-center">Dinner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key, value) in days | groupBy:'day'| orderBy:'-period_type'">
+                        <td>{{value[0].day}}</td>
+                        <td>
+                            <uib-timepicker ng-model="value[0][value[0].day].period_types[periods[value[0].period_type]].start_time" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                        </td>
+                        <td>
+                            <uib-timepicker ng-model="value[0][value[0].day].period_types[periods[value[0].period_type]].end_time" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                        </td>
+                        <td>
+                            <uib-timepicker ng-model="value[1][value[1].day].period_types[periods[value[1].period_type]].start_time" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                        </td>
+                        <td>
+                            <uib-timepicker ng-model="value[1][value[1].day].period_types[periods[value[1].period_type]].end_time" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                        </td>
+                        <td>
+                            <uib-timepicker ng-model="value[2][value[2].day].period_types[periods[value[2].period_type]].start_time" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                        </td>
+                        <td>
+                            <uib-timepicker ng-model="value[2][value[2].day].period_types[periods[value[2].period_type]].end_time" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            <div class="col-xs-12 text-center"> <button type="submit" ng-show="save_btn" class="btn btn-sm btn-primary disabled">Submit</button> <button type="submit" ng-show="!save_btn" ng-click="save()" class="btn btn-primary">Submit</button> </div>
+            <div class="well-lg"></div>
+        </form>
+    </div>
+</div>

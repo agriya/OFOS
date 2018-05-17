@@ -1,0 +1,14 @@
+<div class="gray-bg top-restaurant" id="top_restaurant" ng-show="vm.restaurants.length">
+    <div class="container">        
+        <div class="row">
+            <div class="col-xs-12 top-mar page-content">
+                <h3 class="text-center">{{'Most Popular Shops'|translate}}</h3>               
+                <ol class="list-inline clearfix">
+                    <li ng-repeat="restaurant in vm.restaurants" class="clearfix">
+                        <a class="pull-left" href="restaurant/{{restaurant.id}}/{{restaurant.slug}}" title="{{restaurant.name}}"><img class="media-object" ng-src="{{restaurant.image_name}}" height="120" width="120"></a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

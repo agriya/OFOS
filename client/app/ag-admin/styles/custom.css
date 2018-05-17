@@ -1,0 +1,174 @@
+.switch {
+    position: relative;
+    width: 80px;
+    margin: 0 auto 0 auto;
+}
+.switch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    height: 25px;
+    background: none;
+    margin-bottom: 0;
+    padding: 0 0 0 0;
+    border: none \9;
+    display: block \9;
+    float: left \9;
+	line-height: 23px !important;
+}
+.switch-inner {
+    width: 200%;
+    margin-left: -100%;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+    display: none \9;
+}
+.switch-switch {
+    width: 12px;
+    height: 12px;
+    margin: 7px 4px;
+    background: #f36451;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -moz-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+    display: none \9;
+}
+.show {
+    display: block;
+}
+.switch-checkbox {
+    display: none;
+    display: block \9;
+    float: left \9;
+}
+.switch-checkbox:checked + .switch-label .switch-inner {
+    margin-left: 0;
+}
+.switch-checkbox:checked + .switch-label .switch-switch {
+    right: 0px;
+}
+.popularswitch:after {
+    content: "Not Popular";
+    padding-left: 26px;
+}
+.popularswitch:before {
+    content: "Popular";
+    padding-left: 8px;
+}
+.spicyswitch:after {
+    content: "Not Spicy";
+    padding-left: 39px;
+}
+.spicyswitch:before {
+    content: "Spicy";
+    padding-left: 12px;
+}
+.addonswitch:after {
+    content: "No Addon";
+    padding-left: 32px;
+}
+.addonswitch:before {
+    content: "Addon";
+    padding-left: 12px;
+}
+.activeswitch:after {
+    content: "Inactive";
+    padding-left: 36px;
+}
+.activeswitch:before {
+    content: "Active";
+    padding-left: 12px;
+}
+.switch-inner:before {
+    padding-right: 22px;
+    background-color: #fff;
+    color: #000;
+	font-size: 12px;
+}
+.switch-inner:after {
+    /*padding-right: 10px;
+    background-color: #eee;*/
+    color: #999;
+	font-size: 10px;
+}
+.block-reorder.reorder, .block-reorder1.reorder1 {
+    border-color: #d9d9d9;
+    cursor: all-scroll;
+}
+.block-reorder, .block-reorder1 {
+    border: 4px dashed transparent;
+}
+.space {
+    padding: 10px 10px 10px 10px;
+}
+.choose_file{
+    position:relative;
+    display:inline-block;    
+	border-radius:8px;
+    border:#ebebeb solid 1px;
+    width:75px; 
+    padding: 4px 6px 4px 8px;
+    font: normal 14px Myriad Pro, Verdana, Geneva, sans-serif;
+    color: #7f7f7f;
+    margin-top: 2px;
+	background:white
+}
+.choose_file input[type="file"]{
+    -webkit-appearance:none; 
+    position:absolute;
+    top:0; left:0;
+    opacity:0; 
+    width: 75px;
+    height: 75px;
+    cursor: pointer;    
+}
+.help-text {
+    padding: 5px 0px 0px 0px;
+    margin: 0px;
+    color: #7f7f7f;
+}
+.price-table  input {
+	width: 65px;
+}
+.login-main {
+	padding:195px 0;
+}
+.login-main .forgot-pass {
+	padding-top: 8px;
+}
+.uib-timepicker .glyphicon-chevron-up, .uib-timepicker .glyphicon-chevron-down {
+	font-size: 10px;
+}
+.active{
+    background-color: #209e91;
+}
+.with-scroll .form-group label {
+    line-height:inherit;
+}
+.with-scroll .table>tbody>tr>td:first-child {
+    text-align:right;
+}
+.with-scroll .table>tbody>tr:nth-child(2)>td:first-child {
+    text-align:left;
+}
+.with-scroll  .form-horizontal > div:nth-child(2) .form-group {
+    padding-top:50px;
+}
+.with-scroll .table>tbody>tr>td:last-child {
+    padding-right:8px !important;
+}
+.ng-admin-entity-setting_categories form ma-submit-button { display:none; }
+
+.al-sidebar a.al-sidebar-list-link {
+    white-space: normal;
+}

@@ -1,0 +1,10 @@
+{
+	"name": "Withdrawal", 
+	"class": "fa fa-2x fa-money",
+	"description": "Withdrawal",
+	"dependencies": "Common",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "15",
+	"plugin_name":"Common/Withdrawal"
+}

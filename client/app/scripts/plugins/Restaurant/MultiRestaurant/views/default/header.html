@@ -1,0 +1,43 @@
+<header class="header bg-primary">
+    <div class="container">
+        <div class="navbar-header nav navbar navbar-btn"> <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+            <a class="navbar-brand" href=""><img src="images/logo.png" alt="[Image: Logo]" title="OFOS" /></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse text-center">
+            <ul class="nav navbar-nav left-nav">
+                <li><a href="" ng-click="vm.homePageScroll('top_restaurant')" title="{{'Top Shop'|translate}}">{{'Top Shop'|translate}}</a></li>
+                <li><a href="" ng-click="vm.homePageScroll('popular_cuisines')" title="{{'Popular Specialities'|translate}}">{{'Popular Specialities'|translate}}</a></li>
+                <li><a href="" ng-click="vm.homePageScroll('how_it_works')" title="{{'How it works'|translate}}">{{'How it works'|translate}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-translate-language-select ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Common/Translation') > -1"> sdsad </li>
+                <li class="login" ng-show="!vm.isAuth" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Order/Order') > -1">
+                    <a href="javascript:void(0)" title="Log in or register" ng-click="vm.openLoginModal()"><img src="images/login-icon.png" alt="[Image: Login-icon]" title="{{'login'|translate}}" /><span>{{'Log in or Register'|translate}}</span></a>
+                </li>
+                <li ng-show="vm.isAuth" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Order/Order') > -1">
+                    <a data-toggle="dropdown" title="{{'My Account'|translate}}" href="javascript:void(0)"> <span>{{'My Account'|translate}}</span> <span><i class="fa fa-angle-down fa-lg"></i></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li> <a href="orders">
+								{{'My Account'|translate}}
+							</a> </li>
+                        <li> <a href="users/addresses">
+								{{'Address Book'|translate}}
+							</a> </li>
+                        <li ng-show="user.role_id !== 2"> <a href="{{vm.site_url}}" target="_blank">
+								{{'Admin Dashboard'|translate}}
+							</a> </li>
+                        <li class="divider"></li>
+                        <li> <a href="users/logout">
+								{{'Log out'|translate}}
+							</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>

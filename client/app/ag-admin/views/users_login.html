@@ -1,0 +1,21 @@
+<div class="login-page">
+    <div class="container">
+   		<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4" id="login_form">
+        	<div class="admin-logo text-center">
+             	<a href="#"><img src="assets/img/logo.png" alt="[Image: OFOS]" title="OFOS" /></a>
+            </div>
+            <form class="form-login" name="loginController.form"  ng-submit="loginController.login()">
+                <h2 class="form-login-heading">Sign in to your account</h2>
+                <div class="form-group email">
+                    <label for="inputLogin" class="sr-only">Login</label>
+                    <input type="text" id="inputLogin" class="form-control" name="username" placeholder="Username" ng-model="loginController.data.username" ng-required="true" ng-minlength="3" ng-enter="loginController.login()">
+                </div>
+                <div class="form-group password">
+                    <label for="inputPassword" class="sr-only">Password</label>
+                   <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" ng-model="loginController.data.password" ng-required="true" ng-minlength="6" ng-maxlength="40" ng-enter="loginController.login()">
+                </div>
+                <button class="btn btn-lg btn-block" type="submit">Sign in</button>
+            </form>
+    	</div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{
+	"name": "Sms", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "Sms",
+	"dependencies": "Order",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "2",
+	"plugin_name":"Order/Sms"
+}

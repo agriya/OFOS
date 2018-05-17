@@ -1,0 +1,74 @@
+<div class="section" ng-controller='UsersRegisterController as vm'>    
+    <form class="form-horizontal user-ascess-form" role="form" name="vm.userSignup" ng-submit="vm.save()">
+        <div class="row">
+            <div class="col-xs-12">               
+                <div class="form-group">
+                    <div class="col-sm-12 col-lg-6 col-xs-12">
+                        <input type="text" ng-model="vm.user.first_name" pattern="[a-zA-Z]+" title="{{'Only enter letters'|translate}}" class="form-control" id="inputFirstName3" placeholder="{{'First Name'|translate}}" autocomplete="off" required>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 col-xs-12">
+                        <input type="text" ng-model="vm.user.last_name" pattern="[a-zA-Z]+" title="{{'Only enter letters'|translate}}" class="form-control" id="inputLastName3" placeholder="{{'Last Name'|translate}}" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="form-group"> 
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <input type="email" ng-model="vm.user.email" pattern="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}" title="{{'Please enter valid email address'|translate}}" class="form-control" id="inputEmail3" placeholder="{{'E-mail'|translate}}" autocomplete="off" required> 
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <input type="text" ng-model="vm.user.username" name="username" pattern="[a-zA-Z0-9_-]+" title="{{'Please enter valid username'|translate}}" class="form-control" id="inputUsername" placeholder="{{'Username'|translate}}" autocomplete="off" required> 
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <div class="col-sm-12 col-lg-6 col-xs-12">
+                        <input type="password" ng-model="vm.user.password" class="form-control" id="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity(form.repeat_password.pattern=this.value;" placeholder="{{'Password'|translate}}" autocomplete="off" required>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 col-xs-12">
+                        <input type="password" class="form-control" name="repeat_password" id="confirm-password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="{{'Repeat Password'|translate}}" autocomplete="off" required> 
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <div class="col-sm-12 col-lg-3 col-xs-12">
+                        <select class="form-control" name="mobile_code" id="mobile_code" ng-model="vm.user.mobile_code" required>
+                            <option value=""><span>{{'Code'|translate}}</span></option>
+                            <option ng-selected="vm.usersSettings.mobile_code == country.iso2" ng-repeat="country in vm.countries" placeholder="{{'Mobile Code'|translate}}" ng-value="country.iso2">{{country.phone}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-lg-9 col-xs-12">
+                        <input type="text" ng-model="vm.user.mobile" title="{{'Please enter valid mobile no'|translate}}" class="form-control" placeholder="{{'Mobile'|translate}}"
+                            id="inputMobile3" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="vm.captcha_enabled === 1">
+                    <div class="google-recaptcha"></div>
+                </div>
+                <div class="form-group" ng-if="vm.captcha_enabled === 1"> 
+                    <span class="error" ng-show="captchaErr">{{captchaErr}}</span> 
+                </div>
+                    <div class="form-group" ng-if="settings.CAPTCHA_TYPE == 'Normal'">
+                    <div class="normal-captcha text-18">
+                        <simple-captcha valid="captchaValid" form={{vm.userSignup}}></simple-captcha>
+                    </div>
+                    <span class="error" ng-show="(vm.userSignup.$submitted || vm.userSignup.normalcapcha1.$touched) && (vm.userSignup.normalcapcha1.$pristine || vm.userSignup.normalcapcha1.$invalid)">
+                        <span ng-if="!captchaValid && vm.userSignup.normalcapcha1.$error.required">{{'Required'| translate }}</span>
+                    </span>
+                        <span class="error" ng-show="(vm.userSignup.$submitted || vm.userSignup.normalcapcha2.$touched) && (vm.userSignup.normalcapcha2.$pristine || vm.userSignup.normalcapcha2.$invalid)">
+                        <span ng-if="!captchaValid && vm.userSignup.normalcapcha2.$error.required">{{'Required'| translate }}</span>
+                    </span>
+                    <span class="error" ng-if="!captchaValid && (!vm.userSignup.normalcapcha1.$error.required && !vm.userSignup.normalcapcha2.$error.required)">Error, incorrect captcha.</span>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="checkbox"> <label>
+                            <input type="checkbox" ng-model="vm.user.is_agree_terms_conditions" name="is_agree_terms_conditions" id="isagreetermsconditions" ng-click="vm.IsAgree()">
+                            <p class="left-space">{{'I have read and accepted the'|translate}} <a href="pages/2/terms-and-conditions" target="_blank">{{'Terms and conditions'|translate}}</a> {{'and'|translate}} <a href="pages/1/privacy-policy" target="_blank">{{'Privacy policy'|translate}}</a></p>
+                        </label> </div>
+                        <div ng-show="vm.is_Agree == '0'" class="text-center redc">( {{'You must agree to the terms and conditions'|translate}} )</div>
+                    </div>
+                </div>
+                <div class="form-group"> <div class="col-sm-12 col-lg-12 col-xs-12"><button type="submit" class="btn btn-block btn-primary">{{'Sign up'|translate}}</button> </div></div>
+            </div>
+        </div>
+    </form>            
+</div>

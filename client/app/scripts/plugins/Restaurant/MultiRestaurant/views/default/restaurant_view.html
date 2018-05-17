@@ -1,0 +1,204 @@
+<div class="section" ng-init="vm.menu_tab=true">
+    <div class="container">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li><a href="/">{{'Home'|translate}}</a> </li>
+            <li><a ng-click="vm.redirectToSearchPage(vm.restaurant.latitude, vm.restaurant.longitude)" href="javascript:void(0)">{{'Shops'|translate}} <span ng-hide="vm.restaurant.city === null">{{'in'|translate}} {{vm.restaurant.city.name}}</span></a>                </li>
+            <li class="active">{{vm.restaurant.name}}</li>
+        </ol>
+    </div>
+</div>
+<div class="restaurant-view section well no-mar"> 
+    <div class="container">
+        <div class="row" ng-show="!vm.loader">
+           
+            <div class="col-md-2">
+                <div data-spy="affix" class="affix-list affix-top" data-offset-top="195" data-offset-bottom="350">
+                    <h4>{{'Categories'|translate}}</h4>
+                    <div custom-scroll class="clearfix scroll">
+                        <ul class="nav nav-stacked row">
+                            <li ng-click="vm.gotoElement(category.name)" ng-repeat="category in vm.restaurant.restaurant_category"> <a href="javascript:void(0)" title="{{category.name}}" class="text-muted">{{category.name}}</a>                                </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel well-sm alert-danger" ng-show="vm.restaurant.is_closed === 1">
+                    <p ng-show="vm.restaurant.is_closed === 1 && vm.restaurant.is_allow_users_to_preorder === 1">{{'Sorry. This restaurant is closed at the moment pre-order for later deliveryCountry'|translate}}</p>
+                    <p ng-show="vm.restaurant.is_closed === 1 && vm.restaurant.is_allow_users_to_preorder === 0">{{'Restaurant is closed. Ordering is not available'|translate}}.</p>
+                </div>
+                <div class="panel">
+                    <ul class="media-list navbar-btn">
+                        <li class="media">
+                            <a class="pull-left" href="restaurant/{{vm.restaurant.id}}/{{vm.restaurant.slug}}" title="{{vm.restaurant.name}}"><img class="media-object" ng-src="{{vm.restaurant.image_name}}" height="100" width="100"></a>
+                            <div class="media-body media-width col-sm-9 col-xs-12">
+                                <div class="clearfix">
+                                    <h3 class="media-heading col-sm-8 no-pad" title="{{vm.restaurant.name}}">{{vm.restaurant.name}}</h3> <span class="text-primary list-group-item-heading pl20 pt5 pull-left"
+                                        ng-show="vm.restaurant.open">{{'Opens at'|translate}} {{vm.restaurant.open}}</span></div>
+                                <p class="list-group-item-text"><span ng-repeat="cuisine in vm.restaurant.restaurant_cuisine | limitTo : 6">{{($index != 0) ? ', ' + cuisine.cuisine.name : cuisine.cuisine.name}}</span>
+                                    <span class="cur" ng-show="vm.restaurant.restaurant_cuisine.length > 6" ng-click="show_more = ! show_more">
+                                    View more</span> <select class="form-control col-md-3"
+                                        ng-show="vm.restaurant.restaurant_cuisine.length > 6 && show_more" class="form-control"
+                                        ng-model="cuisines" ng-options="cuisine.cuisine.id as cuisine.cuisine.name for cuisine in vm.restaurant.restaurant_cuisine | limitTo : (vm.restaurant.restaurant_cuisine.length - 6) : 6"></select></p>
+                                <p class="list-group-item-text"><small><i class="fa fa-map-marker fa-lg"></i> &nbsp;<span ng-hide="vm.restaurant.address === null">{{vm.restaurant.address}}</span><span ng-hide="vm.restaurant.address1 === '' || vm.restaurant.address1 === null">, {{vm.restaurant.address1}}</span><span ng-hide="vm.restaurant.city === null">, {{vm.restaurant.city.name}}</span></small></p>
+                                <p class="list-group-item-text amount"> <span><i class="fa fa-clock-o fa-lg"></i> &nbsp; {{'Delivers in'|translate}} {{vm.restaurant.estimated_time_to_delivery}} {{'min'|translate}}</span>                                    <span ng-repeat='rating in vm.maxRatings track by $index'>
+                                        <i class="fa fa-star text-warning" ng-class="((rating < vm.restaurant.rating_round)? 'fa-star':((((vm.restaurant.rating_point - rating) > 0) && ((vm.restaurant.rating_point - rating) < 1))
+                                        ? 'fa-star-half': 'fa-star-o'))"></i>
+                                    </span> </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-justified">
+                        <li ng-class="vm.menu_tab ? 'active nav-menu' : ''"> <a href="javascript:void(0)" ng-click="vm.menu_tab=true;vm.review_tab=false;vm.info_tab=false">{{'Menu'|translate}}</a>                            </li>
+                        <li ng-class="vm.review_tab ? 'active nav-menu' : ''"><a href="javascript:void(0)" ng-click="vm.menu_tab=false;vm.review_tab=true;vm.info_tab=false">{{'Reviews'|translate}}</a>                            </li>
+                        <li ng-class="vm.info_tab ? 'active nav-menu' : ''"><a href="javascript:void(0)" ng-click="vm.menu_tab=false;vm.review_tab=false;vm.info_tab=true">{{'Info'|translate}}</a>                            </li>
+                    </ul>
+                </div>
+                <div class="panel" ng-show="vm.menu_tab">
+                    <div ng-repeat="(key, value) in vm.restaurant.restaurant_category">
+                        <div class="panel-heading clearfix navbar-btn" id="#c-{{value.name | spaceless}}">
+                            <h3 class="panel-title"> <strong class="pull-left text-primary">{{value.name}}</strong> <span class="pull-right text-muted" ng-click="menu.status = ! menu.status">
+                                        <i  data-toggle="collapse" data-target="#c-{{value.name | spaceless}}" class="cur fa fa-angle-up fa-fw fa-lg" ng-class="{'fa-angle-down': menu.status, 'fa-angle-up': !menu.status}"></i>
+                                    </span> </h3>
+                        </div>
+                        <div uib-collapse="menu.status" class="panel-body collapse in" id="c-{{value.name | spaceless}}">
+                            <div ng-repeat="menu in value.restaurant_menu">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="media">
+                                            <div class="pull-left"><img  ng-src="{{menu.image_name}}" height="64" width="64"></div>
+                                            <div class="clearfix media-body">
+                                                <p class="no-mar clerafix">
+                                                    <h4 class="no-mar"> <span >{{menu.name}}</span> <span class="left-space">
+                                                        <span class="type-border">
+                                                    <span ng-show="menu.menu_type_id == 1">
+                                                    <label>{{'N-V'|translate}}</label><span class="left-space"><span class="type-border text-red ">●</span> </span>
+                                                  </span>                                                    
+                                                <span ng-show="menu.menu_type_id == 0">
+                                                    <label>{{'Veg'|translate}}</label><span class="left-space"><span class="type-border text-green ">●</span> </span> 
+                                                </span>
+                                                            </span> </span>
+                                                    </h4> <span>{{menu.description}}</span> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 pull-right">
+                                        <p class="clearfix navbar-btn">
+                                            <strong ng-show="menu.price_type_id == 1" class="pull-right">{{menu.restaurant_menu_price[0].price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}
+                                            <span ng-show="menu.restaurant_addon != '' && menu.is_popup === true" ng-click="vm.open(menu.restaurant_id,menu.id,menu.restaurant_menu_price[0].id,menu.restaurant_menu_price[0].price)" class="fa fa-fw fa-lg fa-plus-circle text-success cur"></span>          
+                                            
+                                             <span title="Add menu to cart" ng-hide="menu.restaurant_addon != '' && menu.is_popup === true" ng-click="vm.add_cart(menu.restaurant_id,menu.id,menu.restaurant_menu_price[0].id,menu.restaurant_menu_price[0].price)" class="fa fa-fw fa-lg fa-plus-circle text-success cur">
+                                            </span>
+                                            </strong>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <p ng-show="menu.price_type_id == 2 || menu.price_type_id == 3" >
+                                    <span ng-repeat="price in menu.restaurant_menu_price" class="clearfix show top-space">
+                                        <strong class="pull-left pr25">{{price.price_type_name}}</strong>                  
+                                        <strong class="pull-right">{{price.price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}
+                                            <i ng-show="menu.restaurant_addon != '' && menu.is_popup === true" ng-click="vm.open(menu.restaurant_id, menu.id, price.id, price.price)" class="fa fa-fw fa-lg fa-plus-circle text-success cur"></i>                                
+                                            <i ng-hide="menu.restaurant_addon != '' && menu.is_popup === true" ng-click="vm.add_cart(menu.restaurant_id, menu.id, price.id, price.price)" class="fa fa-fw fa-lg fa-plus-circle text-success cur" title="{{'Add menu to cart'|translate}}"></i>
+                                        </strong>
+                                    </span>
+                                 </p>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger navbar-btn" ng-hide="vm.empty_menu" ng-if="!vm.loader">
+                         <p class="text-center">{{'No Menus Found'|translate}}</p>
+                       </div>
+                  <hr ng-hide="$last"> </div>
+                </div>
+                <div class="panel" ng-show="vm.review_tab">
+                    <div ng-repeat="review in vm.reviews">
+                        <div class="panel-body">
+                            <p class="clearfix navbar-btn"><span class="pull-left">{{review.user.username}}</span><span class="pull-right text-muted">{{review.created_at | medium}}</span>                                </p>
+                            <p class="clearfix navbar-btn text-muted">{{review.message}}</p>
+                            <p class="clearfix navbar-btn" ng-init="rating = review.rating">
+                                <uib-rating ng-model="rating" max="5" read-only="true"></uib-rating>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="well-sm" ng-show="vm.more_reviews_btn">
+                        <button class="btn" type="button" ng-click="vm.moreReviews()">{{'Load more reviews'|translate}}</button>
+                    </div>
+                    <div class="well-sm">
+                        <div class="alert alert-danger navbar-btn" ng-show="!vm.reviews.length" ng-if="!vm.loader">
+                            <p class="text-center">{{'No Reviews Found'|translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel" ng-show="vm.info_tab">
+                    <div>
+                        <div class="panel-body" ng-if="vm.info_tab">
+                            <ng-map center="{{vm.restaurant.latitude}},{{vm.restaurant.longitude}}">
+                                <marker position="{{vm.restaurant.latitude}},{{vm.restaurant.longitude}}"></marker>
+                            </ng-map>
+                            <address class="clearfix text-16">
+                                <h4 class="text-b top-space">{{'Address'|translate}}</h4>
+                                <span ng-hide="vm.restaurant.address === null">{{vm.restaurant.address}},</span>
+                                <span ng-hide="vm.restaurant.address1 === '' || vm.restaurant.address1 === null"> {{vm.restaurant.address1}},</span>                                <br>
+                                <span ng-hide="vm.restaurant.city === null"> {{vm.restaurant.city.name}}</span>
+                                <span ng-hide="vm.restaurant.state === null">, {{vm.restaurant.state.name}}</span>
+                                <span ng-hide="vm.restaurant.zip_code === null">, {{vm.restaurant.zip_code}}</span>
+                            </address>
+                            <dl class="dl-horizontal text-16 no-mar">
+                                <dt><strong class="text-capitalize">{{'cuisine'|translate}}</strong></dt>
+                                <dd><span ng-repeat="cuisine in vm.restaurant.restaurant_cuisine">
+                                    <a href="restaurants/cuisine/{{cuisine.cuisine.id}}/{{cuisine.cuisine.slug}}">{{($index != 0) ? ', ' + cuisine.cuisine.name : cuisine.cuisine.name}}</a>
+                                </span></dd> <span ng-hide="vm.restaurant.delivery_charge === null"> 
+                                <dt><strong>{{'Delivery fee'|translate}}</strong><dt>
+                                <dd><span ng-show="vm.restaurant.delivery_charge !== '0'">{{vm.restaurant.delivery_charge | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                                <span ng-show="vm.restaurant.delivery_charge === '0'">{{'Free'|translate}}</span> </span>
+                                </dd> <span ng-hide="vm.restaurant.estimated_time_to_delivery === null"> 
+                                 <dt><strong>{{'Delivery time'|translate}}</strong></dt>
+                                <dd>{{vm.restaurant.estimated_time_to_delivery}} min</dd>
+                                </span>
+                                <dt>Min. order Amount</dt>
+                                <dd><span>{{'Min. order'|translate}} - {{vm.restaurant.minimum_order_for_booking | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}  </span></dd>
+                            </dl>
+                        </div>
+                        <div class="panel-body" ng-show="vm.restaurant.restaurant_photo.length">
+                            <p class="clearfix navbar-btn"><strong>{{'Photos'|translate}}</strong></p>
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" ng-repeat="(key, value) in vm.restaurant.restaurant_photo" ng-class='{active:$first}' data-slide-to="{{key}}"></li>
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item" ng-repeat="photo in vm.restaurant.restaurant_photo" ng-class='{active:$first}'> <img class="col-md-12 media-object" ng-src="{{photo.image_name}}" alt=""> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body  text-16">
+                            <p class="clearfix navbar-btn"><strong>{{'Opening Hours'|translate}}</strong></p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>{{'Day'|translate}}</th>
+                                        <th>{{'Breakfast'|translate}}</th>
+                                        <th>{{'Lunch'|translate}}</th>
+                                        <th>{{'Dinner'|translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(key, value) in vm.restaurant.restaurant_timing | groupBy:'day'">
+                                        <td>{{value[0].day}}</td>
+                                        <td> {{value[0].start_time | split:':'}} - {{value[0].end_time | split:':'}} </td>
+                                        <td> {{value[1].start_time | split:':'}} - {{value[1].end_time | split:':'}} </td>
+                                        <td> {{value[2].start_time | split:':'}} - {{value[2].end_time | split:':'}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             
+            <div class="col-md-4 checkout">
+                <checkout-dashboard delivery-charge='{{vm.restaurant.delivery_charge}}' rest-sales-tax='{{vm.restaurant.sales_tax}}' cookie-id='{{vm.current_cookie_id}}'
+                    minimum-order-booking='{{vm.restaurant.minimum_order_for_booking}}' ng-if="vm.restaurant && vm.current_cookie_id"></checkout-dashboard>
+            </div>
+            
+        </div>
+          <div class="loader-wrapper" ng-if="vm.loader" ng-include="'views/loader.html'"></div>
+    </div>
+    

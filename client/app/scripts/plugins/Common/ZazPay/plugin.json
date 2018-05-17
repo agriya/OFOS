@@ -1,0 +1,10 @@
+{
+	"name": "ZazPay", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "ZazPay",
+	"dependencies": "Common",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "13",
+	"plugin_name":"Common/ZazPay"
+}

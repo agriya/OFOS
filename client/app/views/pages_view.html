@@ -1,0 +1,10 @@
+<div ng-controller="PageViewController as vm">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 space top-mar page-content">
+                <h2>{{vm.page.title}}</h2>
+                <p ng-bind-html="vm.page.content | unsafe"></p>
+            </div>
+        </div>
+    </div>
+</div>

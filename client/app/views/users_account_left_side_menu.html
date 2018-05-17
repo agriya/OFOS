@@ -1,0 +1,11 @@
+<ul class="list-unstyled navbar-btn user-account-left-sidebar panel well-sm right-list">
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Order/Order') > -1"> <a class="txt-dec" href="orders"><i class="fa fa-shopping-cart fa-fw"></i> {{'Orders'|translate}}</a></li>
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Order/Review') > -1"> <a class="txt-dec" href="users/restaurants/reviews"><i class="fa fa-star fa-fw"></i> {{'Reviews'|translate}}</a></li>
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Order/Order') > -1"> <a class="txt-dec" href="users/settings"><i class="fa fa-fw fa-user"></i> {{'Account Settings'|translate}}</a></li>
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Order/Order') > -1"> <a class="txt-dec" href="users/change_password"><i class="fa fa-key"></i> {{'Change Password'|translate}}</a></li>
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Order/Order') > -1"> <a class="txt-dec" href="users/addresses"><i class="fa fa-fw fa-map-marker"></i> {{'Address Book'|translate}}</a></li>
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Common/Withdrawal') > -1"> <a class="txt-dec" href="users/cash_withdrawals"><i class="fa fa-fw fa-money"></i> {{'Cash Withdrawals'|translate}}</a></li>
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Common/Withdrawal') > -1"> <a class="txt-dec" href="users/money_transfer_account"><i class="fa fa-fw fa-book"></i> {{'Money Transfer Account'|translate}}</a></li>
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Order/Order') > -1"> <a class="txt-dec" href="users/transactions"><i class="fa fa-fw fa-money"></i> {{'Transactions'|translate}}</a></li>
+    <li class="navbar-btn mb15" ng-if="$root.settings.SITE_ENABLED_PLUGINS.indexOf('Common/Wallet') > -1"> <a class="txt-dec" href="wallets"><i class="fa fa-fw fa-google-wallet"></i> {{'Add to Wallet'|translate}}</a></li>
+</ul>

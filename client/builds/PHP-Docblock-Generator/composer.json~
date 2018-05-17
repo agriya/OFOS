@@ -1,0 +1,13 @@
+{
+    "name": "agentile/php-docblock-generator",
+    "description": "Generate PHPDoc Blocks in files and Folders",
+    "require": {},
+    "autoload": {
+		"psr-0": {
+			"DocBlockGenerator\\": "src"
+		}
+	},
+    "bin": [
+		"bin/docblock"
+	],
+}

@@ -1,0 +1,172 @@
+<div class="clearfix cover-image search-cover-image">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active"> </div>
+            <div class="item item-1"> </div>
+            <div class="item item-2"> </div>
+            <div class="carousel-caption">
+                <div class="text-center">
+                    <h2 class="fa-inverse">{{'Order delicious food online!'|translate}}</h2>
+                    <h3 class="text-20">{{'Order food online from the best shop near you'|translate}}</h3><br> 
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-controller='SingleRestaurantController as vm'>
+    <div class=" well no-mar" id="restaurant_Categories">    
+        <div class="container">  
+        <!-- Quick Order
+            =============== -->
+            <!--<quickorder></quickorder>  -->            
+            <div class="row col-md-12 ">               
+                <div class="col-sm-12 col-md-12" ng-show="vm.restaurants.length > 1"><div class="dropdown navbar-right">
+                        <div  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="h4">{{'Shop'| translate}} <span class=" left-space">:</span> <span class=" left-space">{{vm.restaurants[vm.restaurant_branch_index].name}}</span></span> <span class="caret"></span></div>
+                        <div class="dropdown-menu">
+                            <ul class="list-unstyled">
+                                <li ng-class="vm.restaurant_branch_index == $index ? 'active' : ''" class="text-center" ng-repeat="restaurant in vm.restaurants"><a href="" ng-click='selectedBranch($index)'>{{restaurant.name}}</a></li>
+                            </ul>
+                        </div>
+                    </div>                       
+                </div>                 
+            </div>                                     
+            <div class="row">
+                <div class="col-md-12"> 
+                    <div class="col-md-4 navbar-btn"><span class="text-capitalize h3 left-space" ng-show="vm.restaurants[vm.restaurant_branch_index].restaurant_category.length > 0" >   {{vm.restaurants[vm.restaurant_branch_index].restaurant_category[vm.category_index].name |translate}} {{'Menu'|translate}}</span></div>                    
+                    <div class="col-sm-12 col-md-8 login-register-modal"> 
+                            <ul class="nav nav-tabs nav-justified navbar-right">
+                                <li  ng-class="vm.category_index == $index ? 'active' : ''" ng-repeat="category in vm.restaurants[vm.restaurant_branch_index].restaurant_category | limitTo : vm.categories_limit" ng-click="vm.selectCategory($index, 0)" > <a href="javascript:void(0)" title="{{category.name}}" class="text-muted col-sm-12" >{{category.name}}</a></li> 
+                                <li ng-if="vm.restaurants[vm.restaurant_branch_index].restaurant_category.length > vm.categories_limit"> 
+                                        <div class="dropdown">
+                                        <div href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More<span class="caret"></span></div>
+                                        <div class="dropdown-menu" >
+                                            <ul class="list-unstyled">
+                                                <li class="text-center" ng-repeat="category in vm.restaurants[vm.restaurant_branch_index].restaurant_category | limitTo : vm.categories_limit_to : vm.categories_limit_from"><a href="" ng-click='vm.selectCategory($index, vm.categories_limit)'>{{category.name}}</a></li>                                    
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>                                       
+                            </ul>                             
+                    </div>                            
+                </div>
+            </div>   
+                     
+            <div class="row">                    
+                <div class="col-md-12">
+                    <div uib-collapse="menu.status" class="panel-body collapse in">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="menu in vm.restaurants[vm.restaurant_branch_index].restaurant_category[vm.category_index].restaurant_menu" class="col-md-6">
+                                <div class="panel menu-padding">
+                                  <div class="row navbar-btn">
+                                    <div class="col-md-9">
+                                        <div class="media left-space">
+                                            <div class="pull-left"><img  ng-src="{{menu.image_name}}" height="64" width="64"></div>
+                                            <div class="clearfix media-body">
+                                                <p class="no-mar clerafix">
+                                                    <h4 class="no-mar"> <span >{{menu.name}}</span> <span class="left-space"></span></h4> 
+                                                    <span>{{menu.description}}</span>
+                                                 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 pull-right">
+                                        <p class="clearfix navbar-btn">
+                                            <strong ng-if="menu.price_type_id == 1" class="pull-right">{{menu.restaurant_menu_price[0].price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}
+                                            <span ng-if="menu.restaurant_addon != '' && menu.is_popup === true" ng-click="vm.open(menu.restaurant_id,menu.id,menu.restaurant_menu_price[0].id,menu.restaurant_menu_price[0].price)" class="fa fa-fw fa-lg fa-plus-circle text-success cur"></span>          
+                                            <span title="Add menu to cart" ng-hide="menu.restaurant_addon != '' && menu.is_popup === true" ng-click="vm.add_cart(menu.restaurant_id,menu.id,menu.restaurant_menu_price[0].id,menu.restaurant_menu_price[0].price)" class="fa fa-fw fa-lg fa-plus-circle text-success cur">
+                                            </span>
+                                            </strong>
+                                        </p>                                        
+                                        <span ng-if="menu.menu_type_id == 1" class="pull-right">
+                                            <span class="restaurant-view navbar-btn "><label>{{'N-V'|translate}}</label><span class="left-space"><span class="type-border text-red ">●</span></span><span class="left-space"></span></span>
+                                        </span>                                                     
+                                        <span ng-if="menu.menu_type_id == 0" class="pull-right">
+                                            <span class="restaurant-view"><label>{{'Veg'|translate}}</label><span class="left-space"><span class="type-border text-green ">●</span></span><span class="left-space"></span></span> 
+                                        </span>                                                          
+                                    </div>
+                                </div>
+                                <p ng-if="menu.price_type_id == 2 || menu.price_type_id == 3" class="left-space">
+                                    <span ng-repeat="price in menu.restaurant_menu_price" class="clearfix show top-space">
+                                        <strong class="pull-left pr25">{{price.price_type_name}}</strong>               <strong class="pull-right">{{price.price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}
+                                        <i ng-if="menu.restaurant_addon != '' && menu.is_popup === true" ng-click="vm.open(menu.restaurant_id, menu.id, price.id, price.price)" class="fa fa-fw fa-lg fa-plus-circle text-success cur"></i>                     <i ng-hide="menu.restaurant_addon != '' && menu.is_popup === true" ng-click="vm.add_cart(menu.restaurant_id, menu.id, price.id, price.price)" class="fa fa-fw fa-lg fa-plus-circle text-success cur" title="{{'Add menu to cart'|translate}}"></i>
+                                        </strong>
+                                    </span>
+                                 </p> 
+                                </div>                           
+                            </li>
+                        </ul>    
+                    </div>                            
+                </div>
+            </div> 
+            <div class="alert alert-danger" ng-show="!vm.restaurants[vm.restaurant_branch_index].restaurant_category[vm.category_index].restaurant_menu.length">
+                <p class="text-center">{{'No Menus Found'|translate}}</p>
+            </div> 
+        </div>
+    </div>
+    <!-- Most Popular Shops
+        =============== -->    
+    <div class="gray-bg top-restaurant" id="restaurant_Gallery" ng-show="vm.restaurants[vm.restaurant_branch_index].restaurant_photo.length > 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 top-mar page-content">
+                    <h3 class="text-center">{{'Our Gallery'|translate}}</h3>
+                    <ol class="list-inline clearfix">
+                        <li ng-repeat="restaurantphoto in vm.restaurants[vm.restaurant_branch_index].restaurant_photo | limitTo : vm.restaurant_menu_image_limit" class="clearfix">
+                            <a class="pull-left" title="{{restaurantphoto.name}}"><img class="media-object" ng-src="{{restaurantphoto.image_name}}" height="120" width="120"></a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <!-- Most Popular Menus
+        =============== -->    
+    <div class="gray-bg top-restaurant" id="top_restaurant" ng-show="vm.restaurants[vm.restaurant_branch_index].restaurant_category[vm.category_index].restaurant_menu.length > 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 top-mar page-content">
+                    <h3 class="text-center">{{'Most Popular Menus'|translate}}</h3>
+                    <ol class="list-inline clearfix">
+                        <li ng-repeat="menuphoto in vm.restaurants[vm.restaurant_branch_index].restaurant_category[vm.category_index].restaurant_menu | limitTo : vm.restaurant_menu_image_limit" class="clearfix">
+                            <a class="pull-left" title="{{menuphoto.name}}"><img class="media-object" ng-src="{{menuphoto.image_name}}" height="120" width="120"></a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <!-- How it works
+        =============== -->
+    <div class="gray-bg page-content how-it-works text-center" id="how_it_works">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="text-center">{{'How it works'|translate}}</h3>
+                </div>
+                <div class="col-sm-4">
+                    <a href="javascript:void(0);" title="{{'browse-restaurant'|translate}}"><img src="images/browse-restaurant.png" alt="[Image: browse-restaurant]" class="img-responsive center-block" /></a>
+                    <div class="col-sm-10 float-none center-block">
+                        <p>{{'Browse local cooks and shops posting inspired foods '|translate}}.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <a href="javascript:void(0);" title="{{'order-follow'|translate}}"><img src="images/order-follow.png" alt="[Image: order-follow]" class="img-responsive center-block" /></a>
+                    <div class="col-sm-10 float-none center-block">
+                        <p>{{'Order and follow your favorite local OFOS.'|translate}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <a href="javascript:void(0);" title="{{'hand-crafted'|translate}}"><img src="images/hand-crafted.png" alt="[Image: hand-crafted]" class="img-responsive center-block" /></a>
+                    <div class="col-sm-10 float-none center-block">
+                        <p>{{'Get hand crafted food on posted date by cooks!'|translate}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

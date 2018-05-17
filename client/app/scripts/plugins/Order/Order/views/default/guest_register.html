@@ -1,0 +1,39 @@
+<div class="section well navbar-default" ng-controller='GuestRegisterController as vm'>
+    <your-details></your-details>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 panel login-panel navbar-btn col-md-offset-3">
+                <ul class="h4 lead nav nav-justified navbar-btn">
+                    <li> <a href="users/login" class="text-muted">{{'Login'|translate}}</a> </li>
+                    <li> <a href="users/register" class="text-muted">{{'Register'|translate}}</a> </li>
+                    <li class="active"> <a href="javascript:void(0)" class="text-muted">{{'Guest'|translate}}</a> </li>
+                </ul>
+                <form class="form-horizontal user-ascess-form" role="form" name="vm.guestSignup" ng-submit="vm.save()">
+                    <div class="form-group"> 
+                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                            <input type="email" class="form-control" ng-model="vm.user.email" pattern="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}" placeholder="{{'Email'|translate}}" title="{{'Please enter valid email address'|translate}}" autocomplete="off" required> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-lg-3 col-xs-12">
+                            <select class="form-control" name="mobile_code" id="mobile_code" ng-model="vm.user.mobile_code" required>
+                                <option value=""><span>{{'Code'|translate}}</span></option>
+                                <option ng-selected="vm.usersSettings.mobile_code == country.iso2" ng-repeat="country in vm.countries" ng-value="country.iso2">{{country.phone}}</option>
+                            </select>
+                        </div>                        
+                        <div class="col-sm-12 col-lg-9 col-xs-12 ">
+                            <input type="text" ng-model="vm.user.mobile" title="{{'Please enter valid mobile no'|translate}}" class="form-control" placeholder="{{'Mobile'|translate}}" id="inputMobile3" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="vm.captcha_enabled === 1">
+                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                            <div class="g-recaptcha" vc-recaptcha key="captcha_site_key" on-create="setWidgetId(widgetId)" on-success="vm.captchaErr=''"></div>
+                            <span class="error" ng-show="vm.captchaErr">{{vm.captchaErr}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group"><div class="col-sm-12 col-lg-12 col-xs-12"> <button type="submit" ng-show="vm.save_btn" class="btn btn-block btn-primary disabled">{{'Log in'|translate}}</button>                        <button type="submit" ng-show="!vm.save_btn" class="btn btn-block btn-primary">{{'Log in'|translate}}</button>                        </div></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

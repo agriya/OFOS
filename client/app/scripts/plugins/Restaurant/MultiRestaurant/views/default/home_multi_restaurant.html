@@ -1,0 +1,66 @@
+<div ng-controller="MultiRestaurantCtrl as vmh">
+    <div class="clearfix cover-image search-cover-image">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active"> </div>
+                <div class="item item-1"> </div>
+                <div class="item item-2"> </div>
+                <div class="carousel-caption">
+                    <div class="text-center">
+                        <h2 class="fa-inverse">{{'Order delicious food online!'|translate}}</h2>
+                        <h3 class="text-20">{{'Order food online from the best shop near you'|translate}}</h3> <br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11 float-none center-block">
+                            <form class="form-normal" name="search" ng-submit="vmh.showRetaurants()">
+                                <div class="search"> 
+                                    <span><i class="fa fa-map-marker"></i></span>
+                                    <input type="text" class="form-control" g-places-autocomplete force-selection="true" ng-model="vmh.place" placeholder="{{'Enter your location or area'|translate}}"> 
+                                </div>
+                                <div class="search-btn">
+                                    <input type="submit" ng-class="{'disabled': !vmh.place}" class="btn btn-success" value="{{'Show Shops'|translate}}"/> 
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <popular-restaurant-images></popular-restaurant-images>
+    <popular-cuisines-list></popular-cuisines-list>
+    <!-- How it works
+        =============== -->
+    <div class="gray-bg page-content how-it-works text-center" id="how_it_works">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="text-center">{{'How it works'|translate}}</h3>
+                </div>
+                <div class="col-sm-4">
+                    <a href="javascript:void(0);" title="{{'browse-restaurant'|translate}}"><img src="images/browse-restaurant.png" alt="[Image: browse-restaurant]" class="img-responsive center-block" /></a>
+                    <div class="col-sm-10 float-none center-block">
+                        <p>{{'Browse local cooks and shops posting inspired foods '|translate}}.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <a href="javascript:void(0);" title="{{'order-follow'|translate}}"><img src="images/order-follow.png" alt="[Image: order-follow]" class="img-responsive center-block" /></a>
+                    <div class="col-sm-10 float-none center-block">
+                        <p>{{'Order and follow your favorite local OFOS.'|translate}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <a href="javascript:void(0);" title="{{'hand-crafted'|translate}}"><img src="images/hand-crafted.png" alt="[Image: hand-crafted]" class="img-responsive center-block" /></a>
+                    <div class="col-sm-10 float-none center-block">
+                        <p>{{'Get hand crafted food on posted date by cooks!'|translate}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

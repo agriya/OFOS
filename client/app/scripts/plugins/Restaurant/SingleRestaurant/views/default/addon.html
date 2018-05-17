@@ -1,0 +1,23 @@
+<form class="form-horizontal" role="form" name="reviewForm" ng-submit="vm.addCart()">
+    <div class="modal-header">
+        <h3 class="modal-title">{{'Menu Addons'|translate}}</h3>
+    </div>
+    <div class="modal-header">
+        <div ng-repeat="addon in vm.addons">
+            <div class="col-md-12" ng-show="addon.is_show === true"> <b class="text-center"><p ng-bind-html="addon.name"></p></b>
+                <table class="col-md-6 pl25 menu-popup">
+                    <tr ng-repeat="addon_item in addon.restaurant_addon_item">
+                        <td ng-if="addon.is_multiple === 1"><input type="checkbox" class="cur" ng-click="vm.addonItems(addon_item.restaurant_menu_addon_price[0].id, addon_item.id, addon.is_multiple)"> </td>
+                        <td ng-if="addon.is_multiple === 0"><input type="radio" class="cur" ng-click="vm.addonItems(addon_item.restaurant_menu_addon_price[0].id, addon_item.id, addon.is_multiple)" ng-checked="selected_id == addon_item.id" ng-value="addon_item.id"> </td>
+                        <td>
+                            <p class="pull-left" ng-bind-html="addon_item.name"></p>
+                        </td>
+                        <td ng-if="addon_item.restaurant_menu_addon_price[0].is_free === 1">{{'Free'|translate}}</td>
+                        <td ng-if="addon_item.restaurant_menu_addon_price[0].is_free === 0">{{addon_item.restaurant_menu_addon_price[0].price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer"> <button class="btn btn-warning" type="button" ng-click="vm.cancel()">{{'Cancel'|translate}}</button> <button class="btn btn-primary" type="submit">{{'Continue'|translate}}</button> </div>
+</form>

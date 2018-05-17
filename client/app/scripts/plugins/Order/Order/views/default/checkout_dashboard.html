@@ -1,0 +1,47 @@
+<div data-spy="affix" class="navbar-left affix-list affix-top" data-offset-top="195" data-offset-bottom="350">
+    <div class="clearfix"> <a href="javascript:void(0)" ng-click="vm.checkout()" class="btn btn-block btn-lg btn-success text-center" ng-class="{disabled: minimum_Order_Booking > vm.total || vm.carts.length == 0}">{{'Go to Checkout'|translate}} 							
+					</a> </div>
+    <div class="panel panel-default navbar-btn">
+        <div class="panel-body text-center" ng-show="!vm.carts.length"> <i class="fa fa-4x fa-shopping-cart text-muted"></i>
+            <p class="text-hash pad25">{{'Add menu items into your basket'|translate}}</p>
+        </div>
+        <div class="panel no-mar" ng-show="vm.carts.length">
+            <div class="checkout-list">
+                <div custom-scroll class="clearfix scroll">
+                    <div class="panel" ng-repeat="cart in vm.carts | orderBy:'id'">
+                        <div class="panel-body">
+                            <ul class="list-inline no-mar clearfix">
+                                <li class="input-group-btn left-btn">
+                                    <div class="input-group input-group-sm"> <span class="input-group-btn col-md-12">
+                                        <button class="btn btn-secondary no-border" ng-click="vm.update_cart(cart.id, 1)" type="button">+</button>
+                                    </span> <span class="pull-left value">
+                                        <input type="text" class="btn col-md-12" value="{{cart.quantity}}" readonly>
+                                    </span> <span class="input-group-btn col-md-12">														
+                                        <button class="btn btn-secondary" ng-click="vm.update_cart(cart.id, 0)" type="button">-</button>
+                                    </span> </div>
+                                </li>
+                                <li class="checkout-title col-sm-5">
+                                    <h5 class="truncate no-mar" title="{{cart.restaurant_menu.name}}">{{cart.restaurant_menu.name}}</h5> <span ng-repeat="addon_item in cart.addons" class="pull-left text-12">
+													<span>{{addon_item.name}} : {{addon_item.item}}</span> </span>
+                                </li>
+                                <li class="mt24 text-center">{{cart.total_price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}
+                                </li>
+                                <li class="mt24 pull-right right-close"> <i class="fa fa-times-circle fa-lg cur text-primary" ng-click="vm.remove_cart(cart.id)" aria-hidden="true"></i>                                    </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="panel-body">
+                    <p class="clearfix navbar-btn"> <span class="pull-left">{{'Subtotal'|translate}}</span> <span class="pull-right text-b">{{vm.sub_total | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                        </p>
+                    <p class="clearfix navbar-btn">
+                        <span class="pull-left">{{'Delivery fee'|translate}}</span> <span ng-show="deliveryCharge === '0'"
+                            class=" text-b pull-right">{{'Free'|translate}}</span><span ng-show="deliveryCharge !== '0'" class="pull-right">{{deliveryCharge | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                        </p>
+                    <p class="clearfix navbar-btn"> <span class="pull-left">{{'Service fee'|translate}} ({{restSalesTax}} %)</span> <span class="pull-right text-b">{{vm.sales_tax | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                        </p>
+                    <p class="clearfix navbar-btn text-18 text-b"> <span class="pull-left">{{'Total'|translate}}</span> <span class="pull-right">{{vm.total | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

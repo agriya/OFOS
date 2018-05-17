@@ -1,0 +1,4 @@
+<a data-toggle="dropdown" title="English" href="javascript:void(0)" id="dropdownMenu1"> <span>&nbsp;{{currentLocaleDisplayName ? currentLocaleDisplayName : localesDisplayNames[1]}}</span> <span><i class="fa fa-angle-down fa-lg fa-fw"></i></span></a>
+<ul role="menu" aria-labelledby="dropdownMenu1" class="dropdown-menu">
+    <li class="h6" ng-repeat="language in localesDisplayNames"><a ng-click="changeLanguage(language)">{{language}}</a></li>
+</ul>

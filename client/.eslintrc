@@ -1,0 +1,4 @@
+plugins:
+  - angular
+
+extends: angular

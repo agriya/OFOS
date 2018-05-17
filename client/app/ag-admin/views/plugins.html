@@ -1,0 +1,295 @@
+<div class="row">
+	<div class="col-lg-12">
+		<content-top>
+			<div class="content-top clearfix">
+				<h1 class="al-title ng-binding">PLUGINS</h1>
+				<ul class="breadcrumb al-breadcrumb">
+					<li><a href="#/dashboard">Home</a></li>
+					<li class="ng-binding">Plugins</li>
+				</ul>
+			</div>
+		</content-top>
+	</div>
+</div>
+<div class="row" id="create-view">
+	<div class="clearfix well-sm panel animated zoomIn">
+		<div class="pull-right">To reflect plugin changes, you need to <a class="text-primary" ng-click="fullRefresh();">refresh.</a></div>
+		<!-- restaurant main plugins starts -->
+		<div ng-repeat="plugin in restaurant_plugin.main_plugins">
+			<div ng-if="$first">
+				<div class="col-lg-12">
+					<div class="col-lg-9">
+						<h3 class="navbar-btn"><i class="fa fa-2x fa-trophy fa-fw"></i>Restaurant</h3>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+			</div>
+			<div class="col-lg-12" ng-if="isMultiRestaurant === true">
+				<div class="col-lg-8 col-lg-offset-1">
+					<h3 class="navbar-btn"><i class="{{plugin.class}}"></i> {{plugin.name}}</h3>
+					<p ng-bind-html="plugin.description" class="text-justify"></p>
+				</div>
+				<div class="col-lg-3 text-right">
+					<div class="well-sm"></div>
+					<div class="well-sm"></div>
+					<div class="navbar-btn"></div>
+					<div class="btn-group " uib-dropdown>
+						<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.name, enabled_plugin)">Enabled</a>
+						<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.name, enabled_plugin)">Disabled</a>
+						<a class="btn btn-default" uib-dropdown-toggle ng-hide="isSingleRestaurant === false">
+							<span class="fa fa-cog"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" uib-dropdown-menu ng-hide="isSingleRestaurant === false">
+							<li ng-class="{'disabled': checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+							<li ng-class="{'disabled': !checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+			</div>
+		</div>
+		
+		<!-- restaurant main plugins ends -->
+		<!-- restaurant sub plugins starts -->
+		<div ng-repeat="plugin in restaurant_plugin.sub_plugins | orderBy:'display_order'" ng-if="restaurant_plugin.sub_plugins.length > 0 && isSingleRestaurant === true">
+			<div ng-if="isMultiRestaurant === false">
+				<div class="col-lg-12">
+					<div class="col-lg-9">
+						<h3 class="navbar-btn"><i class="fa fa-2x fa-trophy fa-fw"></i>Restaurant</h3>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+			</div>
+			<div class="col-lg-12">
+				<div class="col-lg-8 col-lg-offset-1">
+					<h3 class="navbar-btn"><i class="{{plugin.class}}"></i> {{plugin.name}}</h3>
+					<p ng-bind-html="plugin.description" class="text-justify"></p>
+				</div>
+				<div class="col-lg-3 text-right">
+					<div class="well-sm"></div>
+					<div class="well-sm"></div>
+					<div class="navbar-btn"></div>
+					<div class="btn-group " uib-dropdown>
+						<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.name, enabled_plugin)">Enabled</a>
+						<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.name, enabled_plugin)">Disabled</a>
+						<a class="btn btn-default" uib-dropdown-toggle ng-hide="isMultiRestaurant === false">
+							<span class="fa fa-cog"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" uib-dropdown-menu ng-hide="isMultiRestaurant === false">
+							<li ng-class="{'disabled': checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+							<li ng-class="{'disabled': !checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn" ng-if="!$last">
+			</div>
+		</div>
+		<!-- restaurant sub plugins ends -->
+
+		<!-- order main plugins starts -->
+		<div ng-repeat="plugin in order_plugin.main_plugins">
+			<div ng-if="$first">
+				<div class="col-lg-12">
+					<div class="col-lg-9">
+						<h3 class="navbar-btn"><i class="fa fa-2x fa-gavel fa-fw"></i>Order</h3>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+			</div>
+			<div class="col-lg-12">
+				<div class="col-lg-8 col-lg-offset-1">
+					<h3 class="navbar-btn"><i class="{{plugin.class}}"></i> {{plugin.name}}</h3>
+					<p ng-bind-html="plugin.description" class="text-justify"></p>
+				</div>
+				<div class="col-lg-3 text-right">
+					<div class="well-sm"></div>
+					<div class="well-sm"></div>
+					<div class="navbar-btn"></div>
+					<div class="btn-group " uib-dropdown>
+						<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.name, enabled_plugin)">Enabled</a>
+						<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.name, enabled_plugin)">Disabled</a>
+						<a class="btn btn-default" uib-dropdown-toggle>
+							<span class="fa fa-cog"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<li ng-class="{'disabled': checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+							<li ng-class="{'disabled': !checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+		</div>
+		<!-- order main plugins ends -->
+		<!-- order sub plugins starts -->
+		<div ng-repeat="plugin in order_plugin.sub_plugins | orderBy:'display_order'" ng-if="order_plugin.sub_plugins.length > 0">
+			<div class="col-lg-12">
+				<div class="col-lg-8 col-lg-offset-1">
+					<h3 class="navbar-btn"><i class="{{plugin.class}}"></i> {{plugin.name}}</h3>
+					<p ng-bind-html="plugin.description" class="text-justify"></p>
+				</div>
+				<div class="col-lg-3 text-right">
+					<div class="well-sm"></div>
+					<div class="well-sm"></div>
+					<div class="navbar-btn"></div>
+					<div class="btn-group " uib-dropdown>
+						<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.name, enabled_plugin)">Enabled</a>
+						<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.name, enabled_plugin)">Disabled</a>
+						<a class="btn btn-default" uib-dropdown-toggle>
+							<span class="fa fa-cog"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<li ng-class="{'disabled': checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+							<li ng-class="{'disabled': !checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn" ng-if="!$last">
+			</div>
+		</div>
+		<!-- order sub plugins ends -->
+
+		
+
+
+		<div ng-repeat="plugin in other_plugin">
+			<div ng-if="$first">
+				<div class="col-lg-12">
+					<div class="col-lg-9">
+						<h3 class="navbar-btn"><i class="{{plugin.Paypal.class}}"></i> {{plugin.Paypal.name}}</h3>
+						<p ng-bind-html="plugin.Paypal.description" class="text-justify"></p>
+					</div>
+					<div class="col-lg-3 text-right">
+						<div class="well-sm"></div>
+						<div class="well-sm"></div>
+						<div class="navbar-btn"></div>
+						<div class="btn-group " uib-dropdown>
+							<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.Paypal.name, enabled_plugin)">Enabled</a>
+							<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.Paypal.name, enabled_plugin)">Disabled</a>
+							<a class="btn btn-default" uib-dropdown-toggle>
+								<span class="fa fa-cog"></span>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu>
+								<li ng-class="{'disabled': checkStatus(plugin.Paypal.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.Paypal.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+								<li ng-class="{'disabled': !checkStatus(plugin.Paypal.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.Paypal.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+				<div class="col-lg-12">
+					<div class="col-lg-9">
+						<h3 class="navbar-btn"><i class="{{plugin.ZazPay.class}}"></i> {{plugin.ZazPay.name}}</h3>
+						<p ng-bind-html="plugin.ZazPay.description" class="text-justify"></p>
+					</div>
+					<div class="col-lg-3 text-right">
+						<div class="well-sm"></div>
+						<div class="well-sm"></div>
+						<div class="navbar-btn"></div>
+						<div class="btn-group " uib-dropdown>
+							<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.ZazPay.name, enabled_plugin)">Enabled</a>
+							<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.ZazPay.name, enabled_plugin)">Disabled</a>
+							<a class="btn btn-default" uib-dropdown-toggle>
+								<span class="fa fa-cog"></span>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu>
+								<li ng-class="{'disabled': checkStatus(plugin.ZazPay.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.ZazPay.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+								<li ng-class="{'disabled': !checkStatus(plugin.ZazPay.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.ZazPay.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+				<div class="col-lg-12">
+					<div class="col-lg-9">
+						<h3 class="navbar-btn"><i class="{{plugin.Translation.class}}"></i> {{plugin.Translation.name}}</h3>
+						<p ng-bind-html="plugin.Translation.description" class="text-justify"></p>
+					</div>
+					<div class="col-lg-3 text-right">
+						<div class="well-sm"></div>
+						<div class="well-sm"></div>
+						<div class="navbar-btn"></div>
+						<div class="btn-group " uib-dropdown>
+							<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.Translation.name, enabled_plugin)">Enabled</a>
+							<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.Translation.name, enabled_plugin)">Disabled</a>
+							<a class="btn btn-default" uib-dropdown-toggle>
+								<span class="fa fa-cog"></span>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu>
+								<li ng-class="{'disabled': checkStatus(plugin.Translation.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.Translation.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+								<li ng-class="{'disabled': !checkStatus(plugin.Translation.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.Translation.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+				<div class="col-lg-12">
+					<div class="col-lg-9">
+						<h3 class="navbar-btn"><i class="{{plugin.Wallet.class}}"></i> {{plugin.Wallet.name}}</h3>
+						<p ng-bind-html="plugin.Wallet.description" class="text-justify"></p>
+					</div>
+					<div class="col-lg-3 text-right">
+						<div class="well-sm"></div>
+						<div class="well-sm"></div>
+						<div class="navbar-btn"></div>
+						<div class="btn-group " uib-dropdown>
+							<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.Wallet.name, enabled_plugin)">Enabled</a>
+							<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.Wallet.name, enabled_plugin)">Disabled</a>
+							<a class="btn btn-default" uib-dropdown-toggle>
+								<span class="fa fa-cog"></span>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu>
+								<li ng-class="{'disabled': checkStatus(plugin.Wallet.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.Wallet.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+								<li ng-class="{'disabled': !checkStatus(plugin.Wallet.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.Wallet.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr class="clearfix list-group-item-text navbar-btn">
+				<div class="col-lg-12">
+					<div class="col-lg-9">
+						<h3 class="navbar-btn"><i class="{{plugin.Withdrawal.class}}"></i> {{plugin.Withdrawal.name}}</h3>
+						<p ng-bind-html="plugin.Withdrawal.description" class="text-justify"></p>
+					</div>
+					<div class="col-lg-3 text-right">
+						<div class="well-sm"></div>
+						<div class="well-sm"></div>
+						<div class="navbar-btn"></div>
+						<div class="btn-group " uib-dropdown>
+							<a class="btn btn-success" href="javascript:void(0)" ng-if="checkStatus(plugin.Withdrawal.name, enabled_plugin)">Enabled</a>
+							<a class="btn btn-danger" href="javascript:void(0)" ng-if="!checkStatus(plugin.Withdrawal.name, enabled_plugin)">Disabled</a>
+							<a class="btn btn-default" uib-dropdown-toggle>
+								<span class="fa fa-cog"></span>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu>
+								<li ng-class="{'disabled': checkStatus(plugin.Withdrawal.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.Withdrawal.plugin_name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+								<li ng-class="{'disabled': !checkStatus(plugin.Withdrawal.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.Withdrawal.plugin_name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<ol class="list-unstyled text-muted" ng-show="vm.pages.length">
+    <li class="navbar-btn"><a href="users/become_restaurant" title="{{'Become Restaurant'|translate}}">{{'Become Restaurant'|translate}}</a></li>
+    <li ng-repeat="page in vm.pages" class="navbar-btn"><a href="pages/{{page.id}}/{{page.slug}}" title="{{page.title}}">{{page.title}}</a></li>
+    <li class="navbar-btn"><a href="contact" title="{{'Contact us'|translate}}">{{'Contact us'|translate}}</a></li>
+</ol>

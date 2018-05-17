@@ -1,0 +1,10 @@
+{
+	"name": "Order", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "Order",
+	"dependencies": "Order",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "1",
+	"plugin_name":"Order/Order"
+}

@@ -1,0 +1,48 @@
+<div class="section navbar-default" ng-controller='ContactController as vm'>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 panel navbar-btn col-md-offset-3">
+                <h3 class="text-center">{{'Contact us'|translate}}</h3>
+                <hr>
+                <form class="form-horizontal" role="form" name="vm.contactForm" ng-submit="vm.save()">
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="inputFirstName3" class="control-label">{{'First Name'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="vm.contact.first_name" pattern="[a-zA-Z]+" title="Only enter letters" class="form-control" id="inputFirstName3" placeholder="{{'First Name'|translate}}" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="inputLastName3" class="control-label">{{'Last Name'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="vm.contact.last_name" pattern="[a-zA-Z]+" title="Only enter letters" class="form-control" id="inputLastName3" placeholder="{{'Last Name'|translate}}" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="inputEmail3" class="control-label">{{'E-mail'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="email" ng-model="vm.contact.email" pattern="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}" title="Please enter valid email address" class="form-control" id="inputEmail3" placeholder="{{'E-mail'|translate}}" autocomplete="off"
+                                required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="inputMobile3" class="control-label">{{'Mobile'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" pattern="\+?\d{10}" title="Please enter valid mobile no" ng-model="vm.contact.phone" class="form-control" id="inputMobile3" placeholder="{{'Mobile'|translate}}" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="inputUsername3" class="control-label">{{'Subject'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="vm.contact.subject" class="form-control" id="inputUsername3" placeholder="{{'Subject'|translate}}" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="inputMessage3" class="control-label">{{'Message'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <textarea type="text" ng-model="vm.contact.message" class="form-control" id="inputMessage3" placeholder="{{'Message'|translate}}" autocomplete="off" required rows="3"></textarea> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">&nbsp;</div>
+                        <div class="col-sm-9 google-recaptcha"> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">&nbsp;</div>
+                        <div class="col-sm-9"> <span class="text-danger" ng-show="vm.captchaErr">{{vm.captchaErr}}</span> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9"> <button type="submit" ng-show="vm.save_btn" class="btn textb btn-primary disabled">{{'Submit'|translate}}</button> <button type="submit" ng-show="!vm.save_btn" class="btn btn-block btn-primary">{{'Submit'|translate}}</button> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

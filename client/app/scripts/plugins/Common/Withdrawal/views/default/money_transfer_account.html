@@ -1,0 +1,60 @@
+<div class="section navbar-default">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb navbar-btn">
+                    <li> <a href="/">{{'Home'|translate}}</a> </li>
+                    <li class="active">{{'Money Transfer Account'|translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section navbar-default">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-md-8 col-lg-9 navbar-btn" ng-controller='MoneyTransferAccountController as vm'> 
+                <div class="section navbar-default" ng-hide="vm.loader" >
+                    <div class="panel clearfix">
+                        <div class="panel-heading sep-bot">
+                            <h3 style="display:inline;">{{'Money Transfer Account'|translate}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" class="adminpg-form" name="MoneyTransferAccAdd" ng-submit="vm.MoneyTransferAccSubmit(MoneyTransferAccAdd.$valid)" novalidate>
+                                <div class="row">
+                                    <div class="col-sm-4" ng-class="{ 'has-error' : (MoneyTransferAccAdd.$submitted || MoneyTransferAccAdd.account.$touched) && (MoneyTransferAccAdd.account.$pristine || MoneyTransferAccAdd.account.$invalid) }"> <label class="control-label pro-font-semi-bold text-16" for="account">{{'Account Details'|translate}}</label> </div>
+                                    <div class="col-sm-8"> <textarea class="form-control" name="vm.account" id="account" placeholder="{{'Account Details' | translate}}" ng-model='vm.account' ng-required="true"></textarea> <span class="help-block redc error" ng-show="(MoneyTransferAccAdd.$submitted || MoneyTransferAccAdd.account.$touched) && (MoneyTransferAccAdd.account.$pristine || MoneyTransferAccAdd.account.$invalid) && (MoneyTransferAccAdd.account.$error.required)">{{'Enter Account Details' | translate}}</span>
+                                        <div class="text-muted pro-font-light text-14">
+                                            <p class="no-mar"><span>{{'e.g'|translate}}</span>{{'Bank'|translate}}:&nbsp;{{'HDFC'|translate}}&nbsp;&nbsp;{{'Account No'|translate}}:&nbsp;XXXXXX <span>{{'IFSC Code'|translate}}:&nbsp;<span>XXXXX</span></span> <span>({{'or'|translate}})</span></p>
+                                            <p><span>{{'PayPal Account'|translate}}:&nbsp;<span>example@domain.com</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-4 col-sm-8"> <button type="submit" class="btn btn-primary btn-large clearfix">{{'Submit'|translate}}</button></div>
+                            </form>
+                        </div>
+                        <div class="user-accoumt-blk">
+                            <div class="primary-account" ng-if="vm.moneyTransferAccLists.length > 0">
+                                <div class="clearfix user-bank-detail-blk pull-left" ng-repeat='moneyTransferAccList in vm.moneyTransferAccLists'>
+                                    <p ng-bind-html="moneyTransferAccList.account"> {{moneyTransferAccList.account}} <span ng-if="moneyTransferAccList.is_primary > 0">{{'Primary Account' | translate}}</span> </p>
+                                    <a class="usr-account-delete" title="{{'Delete' | translate}}" ng-click='vm.MoneyTransferAccDelete(moneyTransferAccList.id)'><i class="fa fa-close cur"></i></a>
+                                </div>
+                                <p class="alert alert-danger" ng-show="_metadata.total_records === 0">{{'No records found' | translate}}</p>
+                            </div>
+                        </div>
+                        
+                        <div >
+                            <div class="alert alert-danger" ng-show="!vm.loader && !vm.moneyTransferAccLists.length">
+                                <p class="text-center">{{'No money transfer accounts Found'|translate}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <div class="loader-wrapper" ng-if="vm.loader" ng-include="'views/loader.html'"></div>               
+            </div>
+        </div>
+    </div>
+</div>

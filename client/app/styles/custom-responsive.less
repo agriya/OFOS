@@ -1,0 +1,190 @@
+/* Media Query 
+	===========*/
+
+/* Ganesh 
+    =============*/
+@media (max-width: 767px){
+	.adminpg-form{
+		label{
+			text-align:left;
+			display:block;
+			float:none;
+		}		
+	}
+	.delivery-detil-list{
+		 width:50%;
+		 float:left;
+		 margin-bottom:15px;
+	 }
+	 .checkout-block, .review-order {
+		padding: 0;
+	 }
+	 .checkout-block {
+		h4, .h4, label {
+			font-size: 16px !important;
+		}
+	}
+	 .get-gateways {
+		.btn.btn-primary {
+			width: 100%;
+			margin-bottom: 15px !important;
+		}
+	 }
+	.steps-block {
+		&.list-example li {
+			margin-bottom: 25px;
+			&:after	 {
+				left:0 !important;
+				bottom: -15px !important;
+			}
+		}       
+	} 	
+	.header {
+		li {
+			text-align:center;
+		}
+	}
+	.restaurant-list {
+			.amount {				
+				span {	
+					display:block;
+				 	padding-top: 5px;
+				} 
+			}	
+		}
+	}
+	@media (max-width: 480px){
+		.user-ascess-form {
+			.btn-block{
+				font-size:15px;
+			}
+		}
+		.user-accoumt-bl{
+			.user-bank-detail-blk{
+					width:100%;
+					margin-right:0;
+			}
+
+		}
+		.user-review-img-blk{
+			width:100%;
+			float:none;
+			margin: 0 auto;
+		}
+		.user-review-msg-blk, .user-rev-rating-blk{
+			width:100%;
+			float:none;
+		}
+	}
+
+/* End Ganesh 
+    ===========*/
+
+
+@media(min-width:1200px) {
+	.header { 
+		.left-nav {
+			padding-left: 75px;
+		}
+	}
+    .restaurant-view {
+        .panel {
+            .media-list {
+                padding:10px; 
+            }           
+        }
+    }
+}	
+@media(max-width:991px) {
+    .restaurant-list, .media-width {
+        padding: 20px 0;
+    }
+    .restaurant-view {
+        .panel {
+            .media-list {
+                padding:10px; 
+            }           
+        }
+        .affix-list {
+            position:static;
+        }
+		.checkout {
+			.affix-list {
+				width:100%;
+				top:0;
+			}
+		}
+    } 	
+}
+@media(min-width:992px) {
+	.view-page , .restaurant-view {
+        .restaurant-list , .media-width {
+            width:78%;
+        }	
+	}
+    .review-order {
+        .restaurant-list {
+            width:83%;
+        }
+    }  
+	.restaurant-view {
+		.affix-list {
+			width: 13%;	
+			top:20px;
+		}
+		.affix-top {
+			top:auto;
+		}		
+	}
+}
+@media(min-width:768px) and (max-width:991px) {
+	.header {
+		.navbar-collapse {
+			.navbar-right {
+				padding-left:168px;
+				float:none !important;
+				li {
+					margin-top:5px;
+				}
+			}
+		}
+	}    
+}	
+@media(min-width:768px) {	
+	.cover-image {
+		.carousel-caption {
+			top: 23%;
+		}
+	}
+    .search-cover-image {
+        h4 {
+            padding:90px 0;
+        }
+    }
+}	
+@media(min-width:320px) and (max-width:991px) {
+	.carousel-caption {
+		 bottom: 30%
+	}
+	.cover-image {
+			.search {
+					span {
+							pasition:static;
+					}
+				}
+				.search-btn{
+					position:static;
+					margin-top:20px;
+				}
+		}
+}
+@media(max-width:460px) {
+	.cover-image {
+			.search-btn input {
+					padding:16px 30px 10px;
+			}
+	}
+	.cover-image h2 {
+		font-size:38px;
+	}
+}

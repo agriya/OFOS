@@ -1,0 +1,11 @@
+<div class="user-profile clearfix">
+    <div class="al-user-profile" uib-dropdown>
+        <a uib-dropdown-toggle class="profile-toggle-link">
+            <!-- <span>{{auth.username}}</span> <span class="fa fa-angle-down"></span> --><img src="/images/default-user.png" alt="{{auth.username}}" title="{{auth.username}}" /> </a>
+        <ul class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
+            <li><i class="dropdown-arr"></i></li>
+            <li><a href="#/users/edit/{{auth.id}}"><i class="fa fa-user fa-fw"></i>My Account</a></li>
+            <li><a href="#/logout" class="signout"><i class="fa fa-power-off fa-fw"></i>Log out</a></li>
+        </ul>
+    </div>
+</div>

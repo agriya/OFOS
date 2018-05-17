@@ -1,0 +1,37 @@
+<div class="section well navbar-default" ng-controller='TwitterLoginController as vm'>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mar-top40 col-lg-offset-3">
+                <ul class="h4 nav nav-justified nav-tabs navbar-btn list-group-item-text loginpage-tab mb15">
+                    <li class="active"> <span class="text-muted museo-sans-500">{{'Please enter your details. To complete registration process.'|translate}}</span> </li>
+                </ul>
+                <div class="panel clearfix login-form">
+                    <div class="col-xs-12 mar-top30">
+                        <form class="form-horizontal" role="form" name="twitterEmail" ng-submit="vm.loginNow(twitterEmail.$valid)" novalidate>
+                            <div class="form-group pad25">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="input-group remove_spinner">
+                                        <div class="input-group-addon"> <i class="fa fa-envelope fa-fw"></i> </div> <input type="email" name="email" ng-model="vm.user.email" class="form-control" id="email" placeholder="Enter Email" ng-required="true"> </div>
+                                    <div ng-show="(twitterEmail.$submitted || twitterEmail.email.$touched) && (twitterEmail.email.$pristine || twitterEmail.email.$invalid)">
+                                    <span class="text-primary" ng-show="(twitterEmail.email.$error.required)">{{'Required' | translate }}</span> <span class="text-primary" ng-show="(twitterEmail.email.$error.email)">{{ 'Enter valid email' | translate }}</span>                                        </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="input-group remove_spinner">
+                                        <div class="input-group-addon"> <i class="fa fa-phone fa-fw"></i> </div> <input type="number" name="mobile" ng-model="vm.user.mobile" class="form-control" id="mobile" placeholder="Enter Mobile no" ng-pattern="/^[0-9]*$/" ng-required="true"> </div>
+                                    <div ng-show="(twitterEmail.$submitted || twitterEmail.mobile.$touched) && (twitterEmail.mobile.$pristine || twitterEmail.mobile.$invalid || twitterEmail.mobile.$error.pattern)"> <span class="text-primary" ng-show="(twitterEmail.mobile.$error.required)">{{'Required' | translate }}</span> <span class="text-primary" ng-show="(twitterEmail.mobile.$error.pattern)">{{'Enter valid number'|translate}}</span>                                        </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                    <div class="col-sm-6 col-xs-12 nav nopadding"> <button type="submit" class="btn btn-block btn-success">{{'Submit'|translate}}</button></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

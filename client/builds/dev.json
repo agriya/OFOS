@@ -1,0 +1,9 @@
+{
+	"db_user": "DB-USERNAME",
+	"db_password": "DB-PASSOWRD",
+	"db_name": "DB-NAME",
+	"sftp_upload_path": "SFTP-UPLOAD-ROOT-PATH",
+	"sftp_host": "SFTP-HOST",
+	"sftp_username": "SFTP-USERNAME",
+    "sftp_password": "SFTP-PASSWORD"
+}

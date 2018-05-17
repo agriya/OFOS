@@ -1,0 +1,23 @@
+<div ng-show="!view_type">
+    <div ng-repeat="restaurant_addon_item in restaurant_addon_item" class="time_container row">
+        <div class="ng-admin-field-start_date ng-admin-type-datetime col-sm-10 col-md-8 col-lg-7">
+            <a class="btn pull-right text-danger" href="javascript:void(0)" title="Delete" ng-click="deleteAddonItem(restaurant_addon_item.id, $index)"> <span class="glyphicon glyphicon-trash"></span> </a>
+            <div class="datetime_widget">
+                <p class="input-group"> <input type="text" class="form-control" ng-model="restaurant_addon_item.name" value="{{restaurant_addon_item.name}}" /> <span class="input-group-btn">
+                </span> </p>
+            </div>
+            <hr ng-show="!$last"> </div>
+    </div>
+    <div class="clearfix"> <a class="btn" href="javascript:void(0)" title="Add more" ng-click="addAddonItem()"><span class="glyphicon glyphicon-plus-sign"></span></a> </div>
+</div>
+<div ng-show="view_type">
+    <div ng-repeat="restaurant_addon_item in restaurant_addon_item" class="time_container row">
+        <div class="ng-admin-field-start_date ng-admin-type-datetime col-sm-10 col-md-8 col-lg-7">
+            <div class="datetime_widget">
+                <p ng-bind-html="restaurant_addon_item.name"></p>
+                </p>
+            </div>
+            <hr ng-show="!$last"> </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

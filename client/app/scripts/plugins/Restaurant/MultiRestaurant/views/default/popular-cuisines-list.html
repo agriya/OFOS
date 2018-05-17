@@ -1,0 +1,39 @@
+<div class="popular-cuisines" id="popular_cuisines">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 top-mar page-content">
+                <h3 class="text-center">{{'Popular Specialities'|translate}}</h3>
+                <div class="col-sm-2">
+                    <ol class="list-unstyled">
+                        <li ng-repeat="cuisine in cuisines.first"><a href="restaurants/cuisine/{{cuisine.id}}/{{cuisine.slug}}" title="{{cuisine.name}}">{{cuisine.name}}</a></li>
+                    </ol>
+                </div>
+                <div class="col-sm-2">
+                    <ol class="list-unstyled">
+                        <li ng-repeat="cuisine in cuisines.second"><a href="restaurants/cuisine/{{cuisine.id}}/{{cuisine.slug}}" title="{{cuisine.name}}">{{cuisine.name}}</a></li>
+                    </ol>
+                </div>
+                <div class="col-sm-2">
+                    <ol class="list-unstyled">
+                        <li ng-repeat="cuisine in cuisines.third"><a href="restaurants/cuisine/{{cuisine.id}}/{{cuisine.slug}}" title="{{cuisine.name}}">{{cuisine.name}}</a></li>
+                    </ol>
+                </div>
+                <div class="col-sm-2">
+                    <ol class="list-unstyled">
+                        <li ng-repeat="cuisine in cuisines.fourth"><a href="restaurants/cuisine/{{cuisine.id}}/{{cuisine.slug}}" title="{{cuisine.name}}">{{cuisine.name}}</a></li>
+                    </ol>
+                </div>
+                <div class="col-sm-2">
+                    <ol class="list-unstyled">
+                        <li ng-repeat="cuisine in cuisines.fifth"><a href="restaurants/cuisine/{{cuisine.id}}/{{cuisine.slug}}" title="{{cuisine.name}}">{{cuisine.name}}</a></li>
+                    </ol>
+                </div>
+                <div class="col-sm-2">
+                    <ol class="list-unstyled">
+                        <li ng-repeat="cuisine in cuisines.sixth"><a href="restaurants/cuisine/{{cuisine.id}}/{{cuisine.slug}}" title="{{cuisine.name}}">{{cuisine.name}}</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

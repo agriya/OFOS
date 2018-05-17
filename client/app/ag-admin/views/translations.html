@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="col-lg-12">
+		<content-top>
+			<div class="content-top clearfix">
+				<h1 class="al-title ng-binding">{{'Translations'|translate}}</h1>
+				<ul class="breadcrumb al-breadcrumb">
+					<li><a href="#/dashboard">{{'Home'|translate}}</a></li>
+					<li class="ng-binding">{{'Translations'|translate}}</li>
+				</ul>
+			</div>
+		</content-top>
+	</div>
+</div>
+<div class="row" id="create-view">
+    <div class="clearfix well-sm panel animated zoomIn">
+        <div class="add-block">
+            <a href="#/translations/add" class="btn btn-primary" title="Create a New Translation">{{'Create a New Translation'|translate}}</a>
+        </div>
+        
+        <table class="table table-striped no-mar table-hover">
+                <thead>
+                     <tr>
+                        <th>{{'Language'|translate}}</th>
+                        <th>{{'Manage'|translate}}</th>
+					</tr>
+                </thead>
+                <tbody ng-repeat="translationLanguage in translationLanguages">
+                     <tr class="altrow" ng-repeat="(key, value) in translationLanguage">
+                        <td><span class="c"> {{key}} </span></td>
+                            <td>
+                                <span><a ng-if="language.translation_active == 0" ng-click="languageAction(1,language.Language.id)" href="#" class="btn btn-warning textb" title="Active">{{'Active'|translate}}</a></span>
+                                <span><a ng-if="language.Language.translation_active == 1" ng-click="languageAction(0,language.Language.id)" class="btn btn-warning textb" title="Inactive">{{'Inactive'|translate}}</a></span>
+                                <span><a href="" class="btn btn-success textb" title="Edit" ng-click="languageAction(key)">{{'Manage'|translate}}</a></span>
+                                <span><a href="#" ng-if="language.translation_active == 0"  class="btn btn-danger textb" title="Delete Translation" ng-click="deletelanguage(language.Language.id)">{{'Delete'|translate}}</a></span>
+                            </td>
+						</tr>
+                    <tr ng-if="!translationLanguages" class="text-center">
+                       <td colspan="8" class="text-danger"> {{'No records available'|translate}} </td>
+                    </tr>
+             </tbody>
+        </table>
+   </div>
+</div>

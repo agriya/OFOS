@@ -1,0 +1,17 @@
+.js-loader {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    background-image:url(../assets/img/loader.gif);
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-100px 0 0 -100px;
+}
+.js body.home-site-loading .content{
+    display:none;
+}
+body.site-loading .content{
+    display:none;
+}

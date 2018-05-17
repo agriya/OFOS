@@ -1,0 +1,10 @@
+{
+	"name": "COD", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "COD",
+	"dependencies": "Common",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "",
+	"plugin_name":"Common/COD"
+}

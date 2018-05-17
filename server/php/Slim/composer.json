@@ -1,0 +1,33 @@
+{
+	"name": "Online Food Ordering System",
+	"description": "Online Food Ordering System",
+	"keywords": [
+		"Online Food Ordering System",
+		"slim"
+	],
+	"type": "project",
+	"minimum-stability": "RC",
+	"require": {
+		"slim/slim": "3.*",
+		"illuminate/database": "*",
+		"illuminate/pagination": "^5.2",
+		"illuminate/events": "5.4.36",
+		"illuminate/validation": "^5.3",
+		"illuminate/support": "*",
+		"illuminate/translation": "*",
+		"swiftmailer/swiftmailer": "5.4.5",
+		"pavlakis/slim-cli": "*",
+		"firebase/php-jwt": "*",
+		"paypal/rest-api-sdk-php": "^1.11",
+		"giggsey/libphonenumber-for-php": "^8.8",
+		"twilio/sdk":"5.*",
+		"google/recaptcha": "~1.1",
+		"robmorgan/phinx": "0.5.5"
+	},
+	 "autoload": {
+		"psr-4": {
+			"Models\\": "lib/Models/",
+			"Db\\": "database"
+		}
+	}
+}

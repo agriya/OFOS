@@ -1,0 +1,67 @@
+<div class="section navbar-default">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb navbar-btn">
+                    <li> <a href="/">{{'Home'|translate}}</a> </li>
+                    <li class="active">{{'Add to wallet'|translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section navbar-default add-to-wallet">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-md-8 col-lg-9 navbar-btn">
+                <div class="section navbar-default" ng-controller='WalletController as vm'>
+                    <div class="panel" ng-show="!vm.loader">
+                        <div class="panel-heading sep-bot">
+                            <h3 style="display:inline;">{{'Add to wallet'|translate}}</h3>
+                        </div>
+                        <div class="panel-heading">
+                            <p class="alert alert-danger text-center">{{'Available wallet amount'|translate}}:&nbsp;<span class="textb text-16">{{vm.user_available_balance | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span></p>
+                            <form class="clearfix form-horizontal"
+                                role="form" name="vm.WalletForm" ng-submit="vm.WalletFormSubmit(vm.WalletForm.$valid)">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <div class="form-group col-sm-10" ng-class="{ 'has-error' : ((vm.WalletForm.$submitted || vm.WalletForm.amount.$touched) && (vm.WalletForm.amount.$pristine || vm.WalletForm.amount.$invalid)) || amountErr }">
+                                        <div class="row"> <label class="col-sm-4 control-label text-right" for="amount">{{'Amount'|translate}}</label>
+                                            <div class="col-sm-8"> <input type="number" min="{{vm.minimum_wallet_amount}}" max="{{vm.maximum_wallet_amount}}" class="form-control" name="amount" id="amount" placeholder="{{'Amount'|translate}}" ng-model="vm.amount" ng-change="amountErr=''"
+                                                    required>
+                                                <div ng-show="((vm.WalletForm.$submitted || vm.WalletForm.amount.$touched) && (vm.WalletForm.amount.$pristine || vm.WalletForm.amount.$invalid)) || amountErr"> <span class="help-block error" ng-show="(vm.WalletForm.amount.$error.required)">
+                                    {{'You must enter the amount' | translate}}
+                                </span> <span class="help-block error" ng-show="(vm.WalletForm.amount.$error.number)">
+                                    {{'You did not enter a valid number' | translate}}
+                                </span> <span class="help-block error" ng-show="(vm.WalletForm.amount.$error.min)">
+                                    {{'Your field value is lesser than minimum value' | translate}}
+                                </span> <span class="help-block error" ng-show="(vm.WalletForm.amount.$error.max)">
+                                    {{'Your field value is greater than maximum value' | translate}}
+                                </span> <span class="help-block error" ng-show="amountErr">
+                                    {{amountErr}}
+                                </span> </div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-inline col-sm-offset-4 left-space">
+                                            <li>{{'Minimum withdraw amount'|translate}}:&nbsp;<span>{{vm.minimum_wallet_amount | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span></li>
+                                            <li>{{'Maximum withdraw amount'|translate}}:&nbsp;<span>{{vm.maximum_wallet_amount | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 row">
+                                        <div ng-include="'views/gateway.html'" data-controller="WalletController as vm"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                     <div class="loader-wrapper" ng-if="vm.loader" ng-include="'views/loader.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

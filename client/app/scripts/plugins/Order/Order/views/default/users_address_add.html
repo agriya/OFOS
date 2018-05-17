@@ -1,0 +1,86 @@
+<div class="section navbar-default">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb navbar-btn">
+                    <li> <a href="/">{{'Home'|translate}}</a> </li>
+                    <li class="active">{{'Add Address'|translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section navbar-default">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-md-8 col-lg-9 navbar-btn">
+                <div class="section navbar-default" ng-controller='UsersAddressAddController as vm'>
+                    <div class="panel">
+                        <div class="panel-heading sep-bot">
+                            <h3 style="display:inline;">{{'New Address'|translate}}</h3>
+                        </div>
+                        <div class="panel-heading">
+                            <div >
+                                <form class="form-horizontal adminpg-form" role="form" name="vm.userAddress" ng-submit="vm.save()">
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="inputLocation3" class="control-label">{{'Location'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input class="form-control" id="inputLocation3" g-places-autocomplete force-selection="true" ng-change="vm.location()" ng-model="vm.place" required />
+                                            <p class="help-block" class="form-text text-muted">{{'You must select address from autocomplete'|translate}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="inputTitle3" class="control-label">{{'Name'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.address.title" class="form-control" id="inputTitle3" placeholder="{{'Name'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="inputBuildingAddress3" class="control-label">{{'Building Address'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.address.building_address" class="form-control" id="inputBuildingAddress3" placeholder="{{'Building Address'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="inputAddress3" class="control-label">{{'Locality'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.address.address2" class="form-control" id="inputAddress3" placeholder="{{'Locality'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="inputLandmark3" class="control-label">{{'Landmark'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.address.landmark" class="form-control" id="inputLandmark3" placeholder="{{'Landmark'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="city" class="control-label">{{'City'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.address.city.name" class="form-control" id="city" ng-disabled="vm.disable_city" placeholder="{{'City'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="state" class="control-label">{{'State'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.address.state.name" class="form-control" id="state" ng-disabled="vm.disable_state" placeholder="{{'State'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="country" class="control-label">{{'Country'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="text" ng-model="vm.address.country.iso2" class="form-control" id="country" ng-disabled="vm.disable_country" placeholder="{{'Country'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="inputZip3" class="control-label">{{'Zip code'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="number" ng-model="vm.address.zip_code" class="form-control" id="inputZip3" ng-disabled="vm.disable_zip" placeholder="{{'Zip'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="latitude" class="control-label">{{'Latitude'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="number" ng-model="vm.address.latitude" class="form-control" id="latitude" ng-disabled="vm.disable_latitude" placeholder="{{'Latitude'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4"> <label for="longitude" class="control-label">{{'Longitude'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                                        <div class="col-sm-8"> <input type="number" ng-model="vm.address.longitude" class="form-control" id="longitude" ng-disabled="vm.disable_longitude" placeholder="{{'Longitude'|translate}}" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-8"> <button type="submit" ng-show="vm.save_btn" class="btn  btn-primary disabled">{{'Submit'|translate}}</button> <button type="submit" ng-show="!vm.save_btn" class="btn  btn-primary">{{'Submit'|translate}}</button>                                            </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

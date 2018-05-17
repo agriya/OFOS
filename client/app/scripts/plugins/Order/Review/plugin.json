@@ -1,0 +1,10 @@
+{
+	"name": "Review", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "Review",
+	"dependencies": "Order",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "9",
+	"plugin_name":"Order/Review"
+}

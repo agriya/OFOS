@@ -1,0 +1,135 @@
+<form role="form" class="form-horizontal clearfix" name="vm.PaymentForm" ng-submit="vm.PaymentSubmit(vm.PaymentForm)">
+    <div class="section well">
+        <div class="col-md-12">
+            <ul class="list-inline list-example text-center steps-block">
+                <li>
+                    <div class="show"><a href=""><span class="badge">1</span></a></div><span>{{'Your Details'|translate}}</span> </li>
+                <li>
+                    <div class="show"><a href="review_order"><span class="badge">2</span></a></div><span>{{'Review Order'|translate}}</span> </li>
+                <li class="active">
+                    <div class="show"><a href="checkout"><span class="badge">3</span></a></div><span>{{'Place Order'|translate}}</span> </li>
+            </ul>
+        </div>
+        <div class="container checkout-block">
+            <div class="row clearfix">
+                <div class="col-sm-8">
+                    <div class="panel col-sm-12">
+                        <h3>{{'My Contact Details'|translate}}</h3>
+                        <hr class="row">
+                        <div class="clearfix" ng-if="vm.guest_login != true">
+                            <dl class="dl-horizontal"> <dt>{{'Full Name'|translate}}</dt>
+                                <dd>{{user.username}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal"> <dt>{{'Email'|translate}}</dt>
+                                <dd>{{user.email}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal"> <dt>{{'Mobile'|translate}}</dt>
+                                <dd>+91 {{user.mobile}}</dd>
+                            </dl>
+                        </div>
+                        <div class="clearfix" ng-if="vm.guest_login == true">
+                            <dl class="dl-horizontal"> <dt>{{'Email'|translate}}</dt>
+                                <dd>{{vm.guest_login_details.email}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal"> <dt>{{'Mobile'|translate}}</dt>
+                                <dd>{{vm.guest_login_details.mobile_code}} {{vm.guest_login_details.mobile}}</dd>
+                            </dl>
+                        </div>
+                        <dl class="dl-horizontal" ng-show="isAuth"> <dt></dt>
+                            <dd><a href="users/logout" class="text-primary">{{'Not'|translate}} {{user.username}}? {{'Log out'|translate}}</a></dd>
+                        </dl>
+                    </div>
+                    <coupons></coupons>
+                    <div class="panel col-sm-12" ng-if="vm.is_pickup_or_delivery == 1">
+                        <h3 class="text-capitalize">{{'Your delivery address'|translate}}</h3>
+                        <hr class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"> <span class="form-inline" role="form">
+                                <h4 class="text-capitalize"><input type="radio" ng-model="vm.existing_new_address" value="1" ng-click="vm.addressType(1)" class="input-md text-capitalize">&nbsp;&nbsp;{{'Create new delivery address'|translate}}</h4>
+                            </span> </div>
+                            <div class="panel-body" ng-show="vm.existing_new_address == 1">
+                                <div class="clearfix">
+                                    <div class="col-md-8">
+                                        <div class="col-xs-12">
+                                            <div class="form-group required"> <label for="building_address"> {{'Flat No'|translate}}. / {{'House No'|translate}}. <span aria-hidden="true">*</span> </label> <input type="text" ng-model="vm.user_address_add.building_address" ng-required="vm.existing_new_address == 1"
+                                                    class="form-control" id="building_address"> </div>
+                                            <div class="form-group required"> <label for="address2pwd">{{'Apartment'|translate}} / {{'Locality Name'|translate}} <span aria-hidden="true">*</span> </label> <input type="text" ng-model="vm.user_address_add.address2" ng-required="vm.existing_new_address == 1"
+                                                    class="form-control" id="address2pwd"> </div>
+                                        </div>
+                                        <h4>{{'Your Location'|translate}}</h4>
+                                        <p class="mb15">{{location_name}}</p>
+                                        <div class="mb15" ng-click="delivery.inst = ! delivery.inst"> <i class="fa fa-caret-right fa-lg text-primary" ng-class="{'fa-caret-down': delivery.inst, 'fa-caret-right': !delivery.inst}" aria-hidden="true"></i><a href="javascript:void(0)" class="text-primary">&nbsp;
+                                              {{'Delivery Instructions'|translate}}</a> ({{'Optional'|translate}}) </div>
+                                        <div class="mt10" ng-show="delivery.inst"> <textarea rows="4" cols="68"></textarea> </div>
+                                        <div ng-click="delivery.details = ! delivery.details"> <i class="fa fa-caret-right fa-lg text-primary" ng-class="{'fa-caret-down': delivery.details, 'fa-caret-right': !delivery.details}" aria-hidden="true"></i><a href="javascript:void(0)" class="text-primary text-capitalize">&nbsp;
+                                              {{'Add more delivery details'|translate}}
+                                            </a> </div>
+                                        <div ng-show="delivery.details">
+                                            <div class="well-sm"></div> <span class="col-md-12 text-hash">
+                                            <div class="form-group"> <label for="title"><strong class="text-capitalize">{{'Company'|translate}}({{'if delivery in office'|translate}})</strong></label> <input type="text" ng-model="vm.user_address_add.title" class="form-control" id="title"> </div>
+                                            <div class="form-group"> <label for="landmark"><strong>{{'Landmark'|translate}}</strong></label> <input type="text" ng-model="vm.user_address_add.landmark" class="form-control" id="landmark"> </div>
+                                        </span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" ng-show="vm.address_form">
+                            <div class="panel-heading">
+                                <h4><input type="radio" ng-model="vm.existing_new_address" value="0" ng-click="vm.addressType(0)" class="input-md">&nbsp;&nbsp;{{'Use saved delivery address'|translate}}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-xs-12" ng-repeat="address in vm.user_address" ng-show="vm.existing_new_address == 0">
+                                    <div class="panel panel-default well-sm clearfix">
+                                        <div class="col-md-8">
+                                            <h4><input ng-model="vm.user_address_id" ng-value="address.id" type="radio" class="input-md" ng-click="vm.pickAddress(address.id)" ng-checked="address.id === vm.user_address_id" ng-disabled="address.disable_address">                                                {{address.building_address}}, <span ng-hide="address.address2 === null"> {{address.address2}},</span> <span ng-hide="address.city === null"> {{address.city.name}},</span> <span ng-hide="address.state === null"> {{address.state.name}},</span>                                                <span ng-hide="address.country === null"> {{address.country.name}},</span> <span ng-hide="address.zip_code === null"> {{address.zip_code}}</span> </h4> <span ng-show="address.disable_address" class="text-primary">{{'Outside of the shops delivery area'|translate}}</span>                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="col-md-12 panel clearfix">
+                        <div class="space clearfix" ng-show="vm.show_time"> <span class="pull-left text-hash mt24 text-capitalize">{{'Estimated delivery time'|translate}}</span> <span class="pull-right">
+                                <span class="minute-text">{{vm.restaurant.estimated_time_to_delivery}}</span> <span class="text-12 show">{{'Minutes'|translate}}</span> </span>
+                        </div>
+                        <div class="space clearfix" ng-hide="vm.show_time"> <span class="pull-left text-hash mt10">{{'Delivery time'|translate}}</span> <span class="pull-right">
+                                <span><h4>{{vm.later_delivery_date | date:'yyyy-MM-dd HH:mm'}}</h4></span> </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 panel" ng-show="vm.carts.length">
+                        <h3 class="text-capitalize">{{'our order'|translate}}</h3>
+                        <hr class="row"> <span ng-repeat="cart in vm.carts | orderBy:'id'" class="h4 show row" title="{{cart.restaurant_menu.name}}">
+                            <b class="col-sm-1">{{cart.quantity}}x</b>
+                            <span class="col-sm-6 show">	{{cart.restaurant_menu.name}} </span>
+                        <p class="pull-right col-sm-4 pull-right text-right">{{cart.price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p><br/> <span ng-repeat="addon_item in cart.addons" class="pull-left text-12 pl20">
+                            <span>{{addon_item.name}} : {{addon_item.item}}</span> </span>
+                        <hr class="col-xs-12"> </span>
+                        <div class="mb15 text-hash h4">
+                            <div class="row col-md-10">{{'Subtotal'|translate}}</div>
+                            <div class="text-right">{{vm.sub_total | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</div>
+                        </div>
+                        <div class="mb15 text-hash h4">
+                            <div class="row col-md-10">{{'Delivery fee'|translate}}</div>
+                            <div class="text-right"> <span ng-show="vm.restaurant.delivery_charge !== '0'" class="text-right">{{(vm.is_pickup_or_delivery == 0) ? 0 : vm.restaurant.delivery_charge | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                                <span ng-show="vm.restaurant.delivery_charge === '0'" class="text-right">{{'Free'|translate}}</span> </div>
+                        </div>
+                        <div class="mb15 text-hash h4">
+                            <div class="row col-md-10">+{{'Service fee'|translate}} ({{vm.restaurant.sales_tax}} %)</div>
+                            <div class="text-right">{{vm.sales_tax | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</div>
+                        </div>
+                        <div class="mb15 text-hash h4" ng-hide=" vm.coupon_code === false">
+                            <div class="row col-md-10">{{'Discount'|translate}}</div>
+                            <div class="text-right"> {{vm.discountAmount | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}<i class="fa fa-times" ng-click="vm.revertCoupon()"></i> </div>
+                        </div>
+                        <div class="bg-info h4 clearfix"> <span class="pull-left col-xs-7 col-sm-4 navbar-btn">Total</span> <span class="price pull-right">
+							{{(vm.is_pickup_or_delivery == 0) ? vm.total-vm.restaurant.delivery_charge : vm.total | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}
+						</span> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel clearfix">
+                <div ng-include="'views/gateway.html'" data-controller="CheckoutController as vm"></div>
+            </div>
+        </div>
+    </div>
+</form>

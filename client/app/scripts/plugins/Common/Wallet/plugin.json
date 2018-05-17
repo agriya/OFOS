@@ -1,0 +1,10 @@
+{
+	"name": "Wallet", 
+	"class": "fa fa-2x fa-google-wallet",
+	"description": "Wallet",
+	"dependencies": "Common",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "12",
+	"plugin_name":"Common/Wallet"
+}

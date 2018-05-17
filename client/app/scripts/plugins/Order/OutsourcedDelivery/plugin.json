@@ -1,0 +1,10 @@
+{
+	"name": "OutsourcedDelivery", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "OutsourcedDelivery",
+	"dependencies": "Order",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "7",
+	"plugin_name":"Order/OutsourcedDelivery"
+}

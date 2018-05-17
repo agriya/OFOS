@@ -1,0 +1,10 @@
+{
+	"name": "SingleRestaurant", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "SingleRestaurant",
+	"dependencies": "Restaurant",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "10",
+	"plugin_name":"Restaurant/SingleRestaurant"
+}

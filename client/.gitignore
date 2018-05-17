@@ -1,0 +1,8 @@
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
+/app/images/*_thumb
+/app/scripts/plugins.*
+/app/ag-admin/styles/bootstrap.css

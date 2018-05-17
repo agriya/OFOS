@@ -1,0 +1,168 @@
+<div class="row list-header">
+    <div >
+        <div class="content-top clearfix">
+            <h1 class="al-title"> MENUS </h1>
+        </div>
+    </div>
+</div>
+<div class="panel panel-blur with-scroll animated zoomIn menu-page" ng-controller="MenuCtrl">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title">Menus</h3>
+    </div>
+    <div class="panel-body" style="min-height: 480px;">
+        <div  ng-hide="auth.role_id == user_types.supervisor">
+            <h4>Add Menus to display it on restaurant page</h4>
+            <ui-select ng-model="restaurant_id" on-select="getRestaurant($item)">
+                <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="restaurant in restaurants track by $index" refresh="refreshAddresses($select.search)" refresh-delay="0">
+                    <div ng-bind-html="restaurant.name | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <a href="" ng-show="restaurant_id" class="textb text-13 btn reorder-btn" ng-class="{'active': categorySortableOptions.disabled != true}" ng-click="categorySortableOptions.disabled = categorySortableReorder(categorySortableOptions.disabled)" title="Re-Order">
+        <i class="icon-sort-by-attributes no-pad text-16"></i> <span class="grayc">Category Re-Order </span> </a>
+        <a href="" ng-show="restaurant_id" class="textb text-13 btn reorder-btn" ng-class="{'active': menuSortableOptions.disabled != true}" ng-click="menuSortableOptions.disabled = menuSortableReorder(menuSortableOptions.disabled)"
+            title="Re-Order"> <i class="icon-sort-by-attributes no-pad text-16"></i> <span class="grayc">Menus Re-Order </span> </a>
+        <div class="panel category-container" ui-sortable="categorySortableOptions" ng-model="categories" ng-class="{'reorder1': categorySortableOptions.disabled != true}">
+            <div class="category" ng-repeat="(k, v) in categories">
+                <div class="category block-reorder1" data-restaurant_category_id="{{v.category_id}}" ng-class="{'reorder1': categorySortableOptions.disabled != true}">
+                    <div class="panel-heading clearfix navbar-btn">
+                        <h3 class="panel-title"> <strong class="pull-left text-primary">
+                                    <input type="text" class="form-control col-md-4" ng-model="v.category_name" ng-submit="updateCategory(v.category_name, v.category_id)" ng-blur="updateCategory(v.category_name, v.category_id)" />
+                                </strong> </h3>
+                    </div>
+                    <div class="apps-container panel-body collapse in space block-reorder" ui-sortable="menuSortableOptions" ng-model="v.menus" ng-class="{'reorder': menuSortableOptions.disabled != true}">
+                        <div ng-repeat="(key, value) in v.menus track by $index">
+                            <table class="app" data-restaurant_category_id="{{value.restaurant_category_id}}" ng-class="{'reorder2': menuSortableOptions.disabled != true}">
+                                <tr>
+                                    <td class="choose_file"> <img class="media-object" ng-src="{{value.image_name}}" height="64" width="64"> <input type="file" data-menu_id="{{value.id}}" id="inputTaskAttachments" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"
+                                        /> </td>
+                                    <td class="col-md-1"> <input type="text" class="form-control" placeholder="Menu" ng-model="value.name" ng-blur="editMenus(value, $index)"> </td>
+                                    <td> <select selectpicker class="form-control action-select" placeholder="Menu" ng-model="value.menu_type_id" ng-change="editMenus(value, $index)">
+                                                <option value="0" ng-selected="value.menu_type_id == 0">Veg</option>
+                                                <option value="1" ng-selected="value.menu_type_id == 1">Non-Veg</option>
+                                            </select> </td>                                                                  
+                                    <td>
+                                        <select class="form-control" ng-options="cuisine.id as cuisine.name for cuisine in cuisines_lists" ng-model="value.cuisine_id" ng-change="editMenus(value, $index)">
+                                            <option value="">Select cuisine</option>
+                                        </select>
+                                    </td>                         
+                                    <td>
+                                        <div class="input-checkbox switch"> <input class="switch-checkbox" id="myswitch_{{value.id}}" type="checkbox" ng-model="value.is_popular" ng-change="editMenus(value, $index)"> <label for="myswitch_{{value.id}}" class="switch-label"> 
+                                                    <span class="switch-inner popularswitch show"></span> 
+                                                    <span class="switch-switch show"></span>
+                                                </label> </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-checkbox switch"> <input class="switch-checkbox" id="myswitch_spicy_{{value.id}}" type="checkbox" ng-model="value.is_spicy" ng-change="editMenus(value, $index)"> <label for="myswitch_spicy_{{value.id}}" class="switch-label"> 
+                                                    <span class="switch-inner spicyswitch show"></span>
+                                                    <span class="switch-switch show"></span>
+                                                </label> </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-checkbox switch"> <input class="switch-checkbox" id="myswitch_addon_{{value.id}}" type="checkbox" ng-model="value.is_addon" ng-change="editMenus(value, $index)"> <label for="myswitch_addon_{{value.id}}" class="switch-label"> 
+                                                    <span class="switch-inner addonswitch show"></span> <span class="switch-switch show"></span>
+                                                </label> </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-checkbox switch"> <input class="switch-checkbox" id="myswitch_active_{{value.id}}" type="checkbox" ng-model="value.is_active" ng-change="editMenus(value, $index)"> <label for="myswitch_active_{{value.id}}" class="switch-label"> 
+                                                    <span class="switch-inner activeswitch show"></span> <span class="switch-switch show"></span>
+                                                </label> </div>
+                                    </td>
+                                    <td> <select selectpicker class="form-control action-select" placeholder="Menu" ng-model="value.price_type_id">
+                                                <option value="1" ng-selected="value.price_type_id == 1">Fixed</option>
+                                                <option value="2" ng-selected="value.price_type_id == 2">Size</option>
+                                                <option value="3" ng-selected="value.price_type_id == 3">Slice</option>
+                                            </select> </td>
+                                    <td ng-show="value.price_type_id == 1"> <input type="text" class="form-control" placeholder="Price" ng-model="value.fixed_price" ng-blur="editMenus(value, $index)"> </td>
+                                    <td ng-show="value.price_type_id == 2">
+                                        <table>
+                                            <tr>
+                                                <td><input type="checkbox" ng-model="value.small_price_type_name" ng-checked="isCheckedSections(value.small_price_type_name)" ng-click="isSizePriceType(value, $index, value.small_price_type_name)" ng-value="Small">                                                    Small </td>
+                                                <td><input type="text" class="form-control" placeholder="Price" ng-model="value.small_price" ng-blur="editMenus(value, $index)"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" ng-model="value.medium_price_type_name" ng-checked="isCheckedSections(value.medium_price_type_name)" ng-click="isSizePriceType(value, $index, value.medium_price_type_name)" ng-value="Medium">                                                    Medium </td>
+                                                <td><input type="text" class="form-control" placeholder="Price" ng-model="value.medium_price" ng-blur="editMenus(value, $index)"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" ng-model="value.large_price_type_name" ng-checked="isCheckedSections(value.large_price_type_name)" ng-click="isSizePriceType(value, $index, value.large_price_type_name)" ng-value="Large">                                                    Large </td>
+                                                <td><input type="text" class="form-control" placeholder="Price" ng-model="value.large_price" ng-blur="editMenus(value, $index)"></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td ng-show="value.price_type_id == 3">
+                                        <table class="price-table">
+                                            <tr ng-repeat="(k3, price_type) in value.restaurant_menu_price" ng-show="price_type.price_type_id == 3">
+                                                <td><input type="text" class="form-control" placeholder="Slice" ng-model="price_type.price_type_name"></td>
+                                                <td> <input type="text" class="form-control" placeholder="Price" ng-model="price_type.price" ng-blur="editMenuPrice(value.id, price_type.id)"></td>
+                                                <td><img class="media-object" src="../images/close_icon.png" height="15" width="15" ng-click="deleteMenuPrice(value.id, price_type.id, k3)" /></td>
+                                                <tr>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <a href="" class="textb text-13 btn" title="Add" ng-click="addMenuPrice(value.id)"> <i class="icon-plus-sign no-pad text-18"></i> <span class="grayc">Add Menu Price</span> </a>
+                                                        </td>
+                                                    </tr>
+                                        </table>
+                                    </td>
+                                    <td> <img class="media-object" src="../images/close_icon.png" height="25" width="25" ng-click="deleteMenu(k, key, value.id)" /> </td>
+                                    </tr>
+                                    <tr ng-show="value.is_addon === true">
+                                        <td colspan="8">
+                                            <div ng-repeat="addon in value.restaurant_addon"> <b><p ng-bind-html="addon.name"></p></b>
+                                                <div calss="col-md-12">
+                                                    <table class="col-md-12">
+                                                        <tr ng-repeat="addon_item in addon.restaurant_addon_item">
+                                                            <td>
+                                                                <p class="pull-left" ng-bind-html="addon_item.name"></p>
+                                                            </td>
+                                                            <td> <input type="checkbox" ng-model="addon_item.restaurant_menu_addon_price[0].is_free" ng-selected="addon_item.restaurant_menu_addon_price[0].is_free === true" ng-value="0" ng-click="updateAddonItems(value.id, addon_item.id, value.restaurant_menu_price.id)">                                                                Free </td>
+                                                            <td> <input type="text" class="pull-left" ng-model="addon_item.restaurant_menu_addon_price[0].price" ng-show="addon_item.restaurant_menu_addon_price[0].is_free === false || addon_item.restaurant_menu_addon_price.length === 0"
+                                                                    ng-blur="updateAddonItems(value.id, addon_item.id, value.restaurant_menu_price.id)" /> </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="" class="textb text-13 btn" title="Add" ng-click="addNewMenu(v.category_name, v.category_id, k)"> <i class="icon-plus-sign no-pad text-18"></i> <span class="grayc">Add New Menu</span> </a>
+                </div>
+            </div>
+            <div class="col-md-12 row new_category_block">
+                <div ng-show="show_add_cat" class="col-md-12 row new_category">
+                    <div class="col-md-4"> <input type="text" class="form-control col-md-4" placeholder="Category name" ng-model="new_category_name" ng-blur="addNewCategory()"> </div>
+                </div>
+                <a href="" ng-show="restaurant_id" ng-click="show_add_cat = ! show_add_cat" class="textb text-13 btn" title="Add"> <i class="icon-plus-sign no-pad text-18"></i> <span class="grayc">Add New Category</span> </a>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .open>.dropdown-menu {
+        max-height: 175px;
+        overflow: auto;
+        top: 35px !important;
+    }
+    
+    .dropdown-menu li a {
+        display: block;
+        text-decoration: none;
+        color: #000;
+        padding: 2px 2px 2px 20px;
+    }
+    
+    .dropdown-menu li a:hover {
+        cursor: pointer;
+    }
+    
+    .ui-select-choices .active {
+        background-color: transparent !important;
+    }
+    
+    .ui-select-match .ui-select-toggle i.caret {
+        margin: 8px -6px !important;
+    }
+</style>

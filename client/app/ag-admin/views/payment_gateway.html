@@ -1,0 +1,31 @@
+<div class="section navbar-default" ng-controller="PaymentGatewayCtrl">
+    <div class="container">
+        <form class="row form-horizontal" id="show-view" role="form" name="contactForm" ng-submit="save()">
+            <div class="row" ng-repeat="payment_gateway in payment_gateways">
+                <div class="col-md-12">
+                    <div class="pull-left col-md-12">
+                        <h3> {{payment_gateway.gateway_name}}
+                            <h3>
+                    </div>
+                    <div class="col-md-6">
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th>Live Mode Credential</th>
+                                <th>&nbsp;</th>
+                                <th>Test Mode Credential</th>
+                            </tr>
+                            <tr ng-repeat="fields in payment_gateway.fields">
+                                <td>&nbsp;&nbsp;{{fields.fields.label}} &nbsp;&nbsp;</td>
+                                <td><input type="text" ng-model="payment_gateways_values.live_mode_value[payment_gateway.gateway_id][fields.field_name]" class="form-control" style="margin-bottom:10px;" ng-required="{{fields.fields.required}}"></td>
+                                <td>&nbsp;</td>
+                                <td><input type="text" ng-model="payment_gateways_values.test_mode_value[payment_gateway.gateway_id][fields.field_name]" class="form-control" style="margin-bottom:10px;" ng-required="{{fields.fields.required}}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="well-lg"> <button type="submit" class="btn btn-primary text-center"><span class="glyphicon glyphicon-ok"></span>&nbsp;<span class="hidden-xs">Save changes</span></button> </div>
+        </form>
+    </div>
+</div>

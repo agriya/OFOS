@@ -1,0 +1,45 @@
+<div class="row" id="create-view">
+    <h3>{{'Translation Edit'|translate}}</h3>
+	<form class="col-lg-12" ng-submit="UpdateLanuageText()" novalidate>
+         <table class="table table-bordered table-hover lang-edit table-hover">
+            <tr>
+                <th>{{'Key Text'|translate}}</th>
+                <th>{{'Translated Text'|translate}}</th>
+            </tr>
+            <tr ng-if="loader">
+                <td colspan="4">
+                    <p class="text-center">{{'loading'|translate}}...</p>
+                </td>
+            </tr>
+            <tr ng-repeat="translation in translations" ng-if="translations.length > 0">
+                <td>
+                    <div class="form-group">
+                        <div >
+                            <textarea name="translation.label" ng-model="translation.label" id="datakey-{{$index}}" class="form-control js-translation" ng-disabled="true"></textarea>
+                        </div>				
+                    </div>
+                </td>
+                 <td>
+                    <div class="form-group">
+                        <div >                   
+                            <textarea name="translation.lang_text" ng-model="translation.lang_text" id="datavalue{{$index}}" class="form-control"></textarea>
+                        </div>				
+                    </div> 
+                </td>
+            </tr>
+            <tr class="altrow" ng-if="NoRecordFound">
+                <td colspan="4">
+                    <p class="text-center text-danger">{{'No records Found'|translate}}.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group" ng-if="translations.length > 0">
+		    <div class="col-sm-12">
+			    <br><center><button class="btn btn-primary" type="submit">{{'Update'|translate}}</button></center>
+			</div>
+		</div>
+      <!--  <div class="paging clearfix text-center" ng-if="translations.length > 0">
+                <uib-pagination total-items="totalItems" num-pages="totalPages" ng-model="currentPage" max-size="maxSize" boundary-links="true" boundary-link-numbers="true" rotate="false" items-per-page="maxSize" previous-text="&#xf104;" next-text="&#xf105;" ng-change="pageChanged(currentPage)"></uib-pagination>
+        </div>-->
+	</form>
+</div>

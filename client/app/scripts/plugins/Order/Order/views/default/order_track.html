@@ -1,0 +1,118 @@
+<div class="section navbar-default">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb navbar-btn">
+                    <li> <a href="/">{{'Home'|translate}}</a> </li>
+                    <li class="active">{{'Orders'|translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section navbar-default" ng-controller="OrdersTrackController as vm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 navbar-btn">
+                <div class="panel">
+                    <div class="panel-heading sep-bot">
+                        <h3 style="display:inline;">{{'Orders'|translate}}</h3>
+                    </div>
+                    <ul class="media-list" ng-show="!vm.loader">
+                        <li class="media panel well-sm">
+                            <a class="pull-left cur" href="restaurant/{{vm.order.restaurant.id}}/{{vm.order.restaurant.slug}}"><img class="media-object" ng-src="{{vm.order.image_name}}" height="64" width="64"></a>
+                            <div class="col-md-6">
+                                <div class="clearfix">
+                                    <h4 class="media-heading pull-left"><a clss="cur" href="restaurant/{{vm.order.restaurant.id}}/{{vm.order.restaurant.slug}}">{{vm.order.restaurant.name}}</a></h4>
+                                    ({{'Order'|translate}}: #{{vm.order.id}})&nbsp;&nbsp;
+                                </div>    
+                                <p class="media-heading"></p> 
+                                <button type="button" class="btn btn-link no-pad sitec" id="order_{{vm.order.id}}" ng-click="vm.open(vm.order.restaurant_id,vm.order.id)" ng-if="vm.order.order_status_id === vm.orderStatus.Delivered">{{'Review this order'|translate}}</button>                                
+                            </div>
+                            <div class="pull-right"  ng-if="vm.order.order_status_id == vm.orderStatus.AwaitingCodValidation">
+                                <div class="dropdown">
+                                    <div href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></div> 
+                                    <div class="dropdown-menu" >
+                                        <ul class="list-unstyled">
+                                            <li><a href=""  ng-click="vm.cancelOrder(vm.order.order_status_id,vm.order.id)">Cancel Order</a></li>                                    
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right" ng-if="vm.order.order_status_id == vm.orderStatus.Cancel">
+                                <span class="error"><h4> &nbsp;&nbsp;{{'Canceled'| translate}} &nbsp;&nbsp;</h4></span>
+                                </div>
+                                <div class="pull-right">
+                                    <p class="navbar-btn text-center order-amount">{{vm.order.total_price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p>
+                                    <p class="order-dated">{{vm.order.created_at | date:'MMM d, y h:mm:ss a'}}</p>
+                                </div>
+
+                                <div class="mt10" >
+                                    <table class="table table-striped  table-hover table-bordered">
+                                        <tbody>
+                                            <tr >
+                                                <th class="bold" width="10%">{{'S.No'|translate}}</th>
+                                                <th class="bold" width="20%">{{'Menu Name'|translate}}</th>
+                                                <th class="bold" width="10%">{{'Quantity'|translate}}</th>
+                                                <th class="bold " width="20%">{{'Price'|translate}}</th>
+                                                <th class="bold text-right" width="20%">{{'Total Price'|translate}}</th>
+                                            </tr>
+                                            <tr  ng-repeat="order_item in vm.order.order_items">
+                                                <td >{{$index+1}}</td>
+                                                <td >{{order_item.restaurant_menu.name}}
+                                                    <td>{{order_item.quantity}}</td>
+                                                    <td>{{order_item.restaurant_menu_price.price | currency : selectedCurrency.currency_symbol
+                                                        : GeneralConfig.fraction}}</td>
+                                                    <td class="padright75" align="right">{{order_item.quantity * order_item.restaurant_menu_price.price | currency
+                                                        : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</td>
+                                            </tr>
+                                            <tr >
+                                                <td  align="right" colspan="4">{{'Sub Total'|translate}}</td>
+                                                <td align="right" class=" padright75">{{vm.order.sub_total | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</td>
+                                            </tr>
+                                            <tr >
+                                                <td  align="right" colspan="4">{{'Tax'|translate}} ({{vm.order.restaurant.sales_tax}}%)</td>
+                                                <td align="right" class=" padright75">{{vm.order.sales_tax | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</td>
+                                            </tr>
+                                            <tr >
+                                                <td  align="right" colspan="4">{{'Delivery fee'|translate}}</td>
+                                                <td ng-show="vm.order.delivery_charge !== '0'" align="right" class="padright75">{{vm.order.delivery_charge | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</td>
+                                                <td ng-show="vm.order.delivery_charge === '0'" align="right" class="padright75">{{'Free'|translate}}</td>
+                                            </tr>
+                                            <tr >
+                                                <td  align="right" colspan="4">{{'Total'|translate}}</td>
+                                                <td align="right" class="padright75">{{vm.order.total_price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix">
+                                        <div class="delivery-detil-list">
+                                            <p class="text-center no-mar text-b">{{'Status'|translate}}</p>
+                                            <p class="text-center"> {{vm.order.order_status.name}}</p>
+                                        </div>
+                                        <div class="delivery-detil-list">
+                                            <p class="text-center no-mar text-b">{{'Delivery/Pickup'|translate}}</p>
+                                            <p class="text-center" ng-if="vm.order.is_pickup_or_delivery === true"> {{'Delivery'|translate}}</p>
+                                            <p class="text-center" ng-if="vm.order.is_pickup_or_delivery === false"> {{'Pickup'|translate}}</p>
+                                        </div>
+                                        <div class="delivery-detil-list" ng-hide="vm.order.delivered_date === null">
+                                            <p class="text-center no-mar text-b">{{'Delivered On'|translate}}</p>
+                                            <p class="text-center"> {{vm.order.delivered_date}}</p>
+                                        </div>
+                                        <div class="delivery-detil-list" ng-hide="vm.order.delivery_person === null">
+                                            <p class="text-center no-mar text-b">{{'Delivery Person'|translate}}</p>
+                                            <p class="text-center"> {{vm.order.delivery_person.user.username}}</p>
+                                        </div>
+                                        <div class="delivery-detil-list" ng-hide="vm.order.later_delivery_date === null">
+                                            <p class="text-center no-mar text-b">{{'Later Deliver Date'|translate}}</p>
+                                            <p class="text-center"> {{vm.order.later_delivery_date}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                    <div class="loader-wrapper" ng-include="'views/loader.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>

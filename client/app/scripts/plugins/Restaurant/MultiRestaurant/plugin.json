@@ -1,0 +1,10 @@
+{
+	"name": "MultiRestaurant", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "MultiRestaurant",
+	"dependencies": "Restaurant",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "9",
+	"plugin_name":"Restaurant/MultiRestaurant"
+}

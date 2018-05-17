@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title ng-bind="header"></title>
+    <meta name="description" content="{{settings.META_KEYWORDS}}" />
+    <meta name="keywords" content="{{settings.META_DESCRIPTION}}" />
+    <meta name="viewport" content="width=device-width">
+    <base href="/">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png" />
+    <!-- Font Awesome -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Abhaya+Libre:400,500,600,700,800" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/angular-growl-v2/build/angular-growl.css" />
+    <link rel="stylesheet" href="../bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
+    <link rel="stylesheet" href="../bower_components/select2/select2.css" />
+    <link rel="stylesheet" href="../bower_components/angular-loading-bar/build/loading-bar.min.css">
+    <link rel="stylesheet" href="../bower_components/sweetalert2/dist/sweetalert2.min.css">
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/loader.css">
+    <link type="text/css" rel="stylesheet" href="styles/jquery.mCustomScrollbar.css">
+    <!-- endbuild -->
+</head>
+<body class="site-loading">
+    <div class="loader">
+        <div class="wBall" id="wBall_1">
+            <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_2">
+            <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_3">
+            <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_4">
+            <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_5">
+            <div class="wInnerBall"></div>
+        </div>
+    </div>
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <div ng-controller="MainController as vm">
+        <div growl></div>
+        <!--ng-include="'views/header.html'"-->
+        <div header ng-if="$root.settings.SITE_OFFLINE != 1"></div>
+        <div ui-view autoscroll="true"></div>
+        <!--ng-include="'views/footer.html'"-->
+        <div footer ng-if="$root.settings.SITE_OFFLINE != 1"></div>
+    </div>
+    <div google-analytics></div>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script src="//maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBvXPoR4YXSSib7aucIvrYHrmMknzMEaHM"></script>
+    <script src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecaptchaApiLoaded" async defer></script>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/satellizer/satellizer.js"></script>
+    <script src="../bower_components/angular-md5/angular-md5.js"></script>
+    <script src="../bower_components/angular-growl-v2/build/angular-growl.js"></script>
+    <script src="../bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+    <script src="../bower_components/angular-filter/dist/angular-filter.min.js"></script>
+    <script src="../bower_components/select2/select2.js"></script>
+    <script src="../bower_components/angular-ui-select2/src/select2.js"></script>
+    <script src="../bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+    <script src="../bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+    <script src="../bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
+    <script src="../bower_components/angulartics/dist/angulartics.min.js"></script>
+    <script src="../bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js"></script>
+    <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="../bower_components/angular-dynamic-locale/tmhDynamicLocale.min.js"></script>
+    <script src="../bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js"></script>
+    <script src="../bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+    <script src="../bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+    <script src="../bower_components/ngmap/build/scripts/ng-map.min.js?key=AIzaSyBvXPoR4YXSSib7aucIvrYHrmMknzMEaHM"></script>
+    <script src="../bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="../bower_components/angular-payment/dist/angular-payment-tpls-0.3.0.js"></script>
+    <script src="../bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../bower_components/angular-deferred-bootstrap/angular-deferred-bootstrap.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/services/site_deferred_bootstap.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/cities.js"></script>
+    <script src="scripts/services/states.js"></script>
+    <script src="scripts/services/countries.js"></script>
+    <script src="scripts/services/users_profile.js"></script>
+    <script src="scripts/services/contact.js"></script>
+    <script src="scripts/services/providers.js"></script>
+    <script src="scripts/services/pages.js"></script>
+    <script src="scripts/services/page.js"></script>
+    <script src="scripts/services/payment_gateways.js"></script>
+    <script src="scripts/services/refresh_token.js"></script>
+    <script src="scripts/services/oauth_token_injector.js"></script>
+    <script src="scripts/services/growl.js"></script>
+    <script src="scripts/services/anchorsmoothscroll.js"></script>
+    <script src="scripts/filters/date_format.js"></script>
+    <script src="scripts/directives/google_analytics.js"></script>
+    <script src="scripts/directives/custom_scroll.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/contact.js"></script>
+    <script src="scripts/controllers/page_view.js"></script>
+    <script src="scripts/directives/pages.js"></script>
+    <script src="scripts/directives/google_recaptcha.js"></script>
+    <script src="scripts/directives/normal_captcha.js"></script>
+    <script src="scripts/directives/common_header.js"></script>
+    <script src="scripts/directives/common_footer.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/plugins.js -->
+    <!-- Restaurant -->
+    <!-- MultiRestaurant -->
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/app.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/controllers/multi_restaurant_home.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/controllers/restaurant_view.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/controllers/search.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/controllers/menu_addon.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/services/cuisines.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/services/restaurant_categories.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/services/restaurant_menu.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/services/restaurant_reviews.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/services/restaurants.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/services/restaurant_view.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/directives/popular-cities.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/directives/popular-cuisines.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/directives/popular-cuisines-list.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/directives/popular-restaurants.js"></script>
+    <script src="scripts/plugins/Restaurant/MultiRestaurant/directives/popular-restaurant-images.js"></script>
+    <!-- SingleRestaurant -->
+    <script src="scripts/plugins/Restaurant/SingleRestaurant/app.js"></script>
+    <script src="scripts/plugins/Restaurant/SingleRestaurant/controllers/single_restaurant.js"></script>
+    <script src="scripts/plugins/Restaurant/SingleRestaurant/controllers/menu_addon.js"></script>
+    <script src="scripts/plugins/Restaurant/SingleRestaurant/services/single_restaurant.js"></script>
+    <script src="scripts/plugins/Restaurant/SingleRestaurant/services/branch_Categories.js"></script>
+    <script src="scripts/plugins/Restaurant/SingleRestaurant/services/restaurant_menu.js"></script>
+    <script src="scripts/plugins/Restaurant/SingleRestaurant/directives/footer-restaurants.js"></script>
+    <!--Order-->
+    <script src="scripts/plugins/Order/Order/app.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/user_activation.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_login.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_logout.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_register.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/guest_register.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_change_password.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_forgot_password.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/checkout.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/orders.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/review_order.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_address_add.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_addresses.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/user_transactions.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_settings.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/orders_track.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/view_cart_modal.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/view_cart.js"></script>
+    <script src="scripts/plugins/Order/Order/controllers/users_become_restaurant.js"></script>
+    <script src="scripts/plugins/Order/Order/services/cart.js"></script>
+    <script src="scripts/plugins/Order/Order/services/carts.js"></script>
+    <script src="scripts/plugins/Order/Order/services/get_carts.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_address.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_addresses.js"></script>
+    <script src="scripts/plugins/Order/Order/services/checkout.js"></script>
+    <script src="scripts/plugins/Order/Order/services/orders.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_order.js"></script>
+    <script src="scripts/plugins/Order/Order/services/user_transactions.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_settings.js"></script>
+    <script src="scripts/plugins/Order/Order/services/user_activation.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_register.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_login.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_logout.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_change_password.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_forgot_password.js"></script>
+    <script src="scripts/plugins/Order/Order/services/users_countries.js"></script>
+    <script src="scripts/plugins/Order/Order/directives/checkout_dashboard.js"></script>
+    <script src="scripts/plugins/Order/Order/directives/your-details.js"></script>
+    <script src="scripts/plugins/Order/Order/directives/quick_order.js"></script>
+    <script src="scripts/plugins/Order/Order/directives/cart_count.js"></script>
+    <!--Coupon-->
+    <script src="scripts/plugins/Order/Coupon/app.js"></script>
+    <script src="scripts/plugins/Order/Coupon/services/coupons.js"></script>
+    <script src="scripts/plugins/Order/Coupon/directives/coupons.js"></script>
+    <!--Mobile-->
+    <script src="scripts/plugins/Order/Mobile/app.js"></script>
+    <!--OutsourcedDelivery-->
+    <script src="scripts/plugins/Order/OutsourcedDelivery/app.js"></script>
+    <!--OwnDelivery-->
+    <script src="scripts/plugins/Order/OwnDelivery/app.js"></script>
+    <!--Sms-->
+    <script src="scripts/plugins/Order/Sms/app.js"></script>
+    <!--Supervisor-->
+    <script src="scripts/plugins/Order/Supervisor/app.js"></script>
+    <!--Reviews-->
+    <script src="scripts/plugins/Order/Review/app.js"></script>
+    <script src="scripts/plugins/Order/Review/controllers/users_restaurant_review.js"></script>
+    <script src="scripts/plugins/Order/Review/controllers/users_restaurants_reviews.js"></script>
+    <script src="scripts/plugins/Order/Review/services/users_restaurant_review.js"></script>
+    <script src="scripts/plugins/Order/Review/services/users_restaurants_reviews.js"></script>
+    <script src="scripts/plugins/Order/Review/services/user_reviews.js"></script>
+    <!--Common-->
+    <!--Wallet-->
+    <script src="scripts/plugins/Common/Wallet/app.js"></script>
+    <script src="scripts/plugins/Common/Wallet/controllers/wallet.js"></script>
+    <script src="scripts/plugins/Common/Wallet/services/wallet.js"></script>
+    <!--Paypal-->
+    <script src="scripts/plugins/Common/Paypal/app.js"></script>
+    <!--COD-->
+    <script src="scripts/plugins/Common/COD/app.js"></script>
+    <!--ZazPay-->
+    <script src="scripts/plugins/Common/ZazPay/app.js"></script>
+    <!--Withdrawal-->
+    <script src="scripts/plugins/Common/Withdrawal/app.js"></script>
+    <script src="scripts/plugins/Common/Withdrawal/controllers/cash_withdrawals.js"></script>
+    <script src="scripts/plugins/Common/Withdrawal/controllers/money_transfer_account.js"></script>
+    <script src="scripts/plugins/Common/Withdrawal/services/cash_withdrawals.js"></script>
+    <script src="scripts/plugins/Common/Withdrawal/services/money_transfer_account.js"></script>
+    <script src="scripts/plugins/Common/Withdrawal/services/money_transfer_accounts.js"></script>
+    <!--Translation-->
+    <script src="scripts/plugins/Common/Translation/app.js"></script>
+    <script src="scripts/plugins/Common/Translation/directives/languages.js"></script>
+    <script src="scripts/plugins/Common/Translation/directives/translations.js"></script>
+    <script src="scripts/plugins/Common/Translation/services/languages.js"></script>
+    <!-- Plugin (must be at last) -->
+    <script src="scripts/plugins.cache.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

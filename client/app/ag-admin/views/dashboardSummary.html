@@ -1,0 +1,143 @@
+<div class="dashboard_summary">
+    <div class="row dashboard_custom_panel">
+        <div class="col-lg-3">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-red">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"> <span><i class="fa fa-usd fa-2x"></i> </span></div>
+                            <div class="media-body">
+                                <div >{{adminstats.total_revenue}}</div>
+                                <div class="description-stats">Revenue</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" ng-if="enabled_plugins.indexOf('Order') > -1">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-green">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"><span> <i class="fa fa-file-text-o fa-2x"></i> </span></div>
+                            <div class="media-body">
+                                <div >{{adminstats.total_orders}}</div>
+                                <div class="description-stats">Orders</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3"  ng-if="enabled_plugins.indexOf('Restaurant') > -1">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-yellow">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"> <span><i class="fa fa-cutlery fa-2x"></i> </span></div>
+                            <div class="media-body">
+                                <div >{{adminstats.total_restaurant}}</div>
+                                <div class="description-stats">Shop</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-blue">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"> <span><i class="fa fa-users fa-2x"></i> </span></div>
+                            <div class="media-body">
+                                <div >{{adminstats.customers}}</div>
+                                <div class="description-stats">Customers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="col-sm-3" ng-if="enabled_plugins.indexOf('Order') > -1">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-blue">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"> <span><i class="fa fa-credit-card fa-2x"></i></span> </div>
+                            <div class="media-body">
+                                <div >{{adminstats.daily_transaction}}</div>
+                                <div class="description-stats">Transaction</div>
+                                <div class="description-stats">In a Day</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" ng-if="enabled_plugins.indexOf('Order') > -1">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-yellow">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"> <span><i class="fa fa-credit-card fa-2x"></i></span> </div>
+                            <div class="media-body">
+                                <div >{{adminstats.weekly_transaction}}</div>
+                                <div class="description-stats">Transaction</div>
+                                <div class="description-stats">In a Week</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" ng-if="enabled_plugins.indexOf('Order') > -1">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-green">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"> <span><i class="fa fa-credit-card fa-2x"></i></span> </div>
+                            <div class="media-body">
+                                <div >{{adminstats.monthly_transaction}}</div>
+                                <div class="description-stats">Transaction</div>
+                                <div class="description-stats">In a Month</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" ng-if="enabled_plugins.indexOf('Order') > -1">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-red">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"> <span><i class="fa fa-credit-card fa-2x"></i></span> </div>
+                            <div class="media-body">
+                                <div >{{adminstats.yearly_transaction}}</div>
+                                <div class="description-stats">Transaction</div>
+                                <div class="description-stats">In a Year</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" ng-if="enabled_plugins.indexOf('Order') > -1">
+            <div class="pie-chart-item-container">
+                <div class="panel panel-red">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="pull-left"> <span><i class="fa fa-credit-card fa-2x"></i></span> </div>
+                            <div class="media-body">
+                                <div >{{adminstats.total_transaction}}</div>
+                                <div class="description-stats">Total Transaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

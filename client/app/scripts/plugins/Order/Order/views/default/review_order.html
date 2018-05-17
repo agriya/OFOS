@@ -1,0 +1,129 @@
+<div class="section well review-order">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="list-inline list-example text-center steps-block">
+                <li>
+                    <div class="show"><a href=""><span class="badge">1</span></a></div><span>{{'Your Details'|translate}}</span> </li>
+                <li class="active">
+                    <div class="show"><a href="review_order"><span class="badge">2</span></a></div><span>{{'Review Order'|translate}}</span> </li>
+                <li>
+                    <div class="show"><a href=""><span class="badge">3</span></a></div><span>{{'Place Order'|translate}}</span> </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-8 order-list">
+                <div class="panel well-sm">
+                    <ul class="media-list">
+                        <li class="media">                            
+                            <a class="pull-left" href="restaurant/{{vm.restaurant.id}}/{{vm.restaurant.slug}}"><img ng-src="{{vm.restaurant.image_name}}" height="100" width="100" class="media-object"></a>
+                            <div class="media-body restaurant-list col-md-9 col-xs-12"> <span class="clearfix show"><a href="restaurant/{{vm.restaurant.id}}/{{vm.restaurant.slug}}"><h3 class="pull-left no-mar" title="{{vm.restaurant.name}}">{{vm.restaurant.name}}</h3></a> <span ng-if="vm.restaurant.open" class="text-primary list-group-item-heading pull-left pl20"> <small>{{'Opens at'|translate}}  {{vm.restaurant.open}}</small> </span></span>
+                                <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="vm.restaurant.is_closed === 0 && vm.restaurant.is_allow_users_to_preorder === 0">{{'Order'|translate}}</p>
+                                <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="vm.restaurant.is_closed === 1 && vm.restaurant.is_allow_users_to_preorder === 1">{{'Preorder'|translate}}</p>
+                                <p class="btn btn-warning pull-right hidden-xs js-pre-order" ng-show="vm.restaurant.is_closed === 1 && vm.restaurant.is_allow_users_to_preorder === 0">{{'View Menu'|translate}}</p>
+                                <p class="list-group-item-text"><span ng-repeat="cuisine in vm.restaurant.restaurant_cuisine | limitTo : 6">{{($index != 0) ? ', ' + cuisine.cuisine.name : cuisine.cuisine.name}}</span><span class="cur" ng-show="vm.restaurant.restaurant_cuisine.length > 6"
+                                        ng-click="show_more = ! show_more"> View more</span> <select class="form-control col-md-3" ng-show="vm.restaurant.restaurant_cuisine.length > 6 && show_more" class="form-control" ng-model="cuisines" ng-options="cuisine.cuisine.id as cuisine.cuisine.name for cuisine in vm.restaurant.restaurant_cuisine | limitTo : (vm.restaurant.restaurant_cuisine.length - 6) : 6"></select></p>
+                                <p class="list-group-item-text"> <i class="fa fa-map-marker"></i> &nbsp; <span ng-hide="vm.restaurant.address === null">{{vm.restaurant.address}}</span><span ng-hide="vm.restaurant.address1 === '' || vm.restaurant.address1 === null">, {{vm.restaurant.address1}}</span>                                    <span ng-hide="vm.restaurant.city === null">, {{vm.restaurant.city.name}}</span> </p>
+                                <p class="list-group-item-text amount"> <span><i class="fa fa-motorcycle fa-fw fa-lg"></i> {{'Delivery fee'|translate}} <span ng-show="vm.restaurant.delivery_charge !== '0'">{{vm.restaurant.delivery_charge | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                                    <span ng-show="vm.restaurant.delivery_charge === '0'">: {{'Free'|translate}}</span> </span> <span><i class="fa fa-money fa-fw fa-lg"></i> {{'Min. order'|translate}} - {{vm.restaurant.minimum_order_for_booking | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}  </span><span><i class="fa fa-clock-o fa-fw fa-lg"></i> {{'Delivers in'|translate}} {{vm.restaurant.estimated_time_to_delivery}} {{'min'|translate}}</span>                                    <span class="show top-mspace">
+                                    <i ng-repeat='rating in vm.maxRatings track by $index'>
+                                        <i class="fa fa-star text-warning" ng-class="((rating < vm.restaurant.rating_round)? 'fa-star':((((vm.restaurant.rating_point - rating) > 0) && ((vm.restaurant.rating_point - rating) < 1))
+                                        ? 'fa-star-half': 'fa-star-o'))"></i>
+                                    </i>                                    
+                                 </span> </p>
+                            </div> <br/>
+                            <ul class="list-inline clearfix">
+                                <li class="col-xs-12" ng-repeat="cart in vm.carts | orderBy:'id'">
+                                    <div class="col-md-5 col-sm-6 heading row">
+                                        <h4 class="media-heading">&nbsp;{{cart.restaurant_menu.name}}</h4> <span ng-repeat="addon_item in cart.addons" class="pull-left text-12">
+                                        <span class="pl20">{{addon_item.name}} : {{addon_item.item}}</span> </span>
+                                    </div>
+                                    <div class="col-sm-3 input-group-btn pull-left">
+                                        <div class="input-group input-group-sm"> <span class="input-group-btn col-md-12">
+												<button class="btn btn-secondary no-border" ng-click="vm.update_cart(cart.id, 1)" type="button">+</button>
+                                            </span> <span class="pull-left value">
+                                                <input type="text" class="btn col-m-12" value="{{cart.quantity}}" readonly>
+                                            </span> <span class="input-group-btn">
+                                                <button class="btn btn-secondary no-mar" ng-click="vm.update_cart(cart.id, 0)" 00type="button">-</button>
+                                            </span> </div>
+                                    </div>
+                                    <div class="mt24 col-sm-4 col-xs-9 text-center"> <span class="h4">{{cart.total_price  | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}&nbsp;</span> </div>
+                                    <div class="pull-right ver-space close-icon"> <i class="fa fa-times-circle fa-lg text-primary cur" aria-hidden="true" ng-click="vm.remove_cart(cart.id, $index)"></i> </div>
+                                </li>
+                            </ul>
+                            <div class="price-total text-right" ng-show="vm.carts.length"> <span class="h4 col-sm-9"> {{'Subtotal'|translate}} </span> <span class="price">{{vm.sub_total  | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}} &nbsp; </span> </div>
+                            <ul class="list-inline" ng-show="vm.carts.length">
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-7"></div>
+                                    <div class="col-md-3">{{'Delivery fee'|translate}}</div>
+                                    <div ng-show="vm.restaurant.delivery_charge !== '0'" class="pull-right">{{(vm.is_allow_users_to_door_delivery_order == 0) ? 0 : vm.restaurant.delivery_charge | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}&nbsp;</div>
+                                    <div ng-show="vm.restaurant.delivery_charge === '0'"
+                                        class="pull-right">{{(vm.is_allow_users_to_door_delivery_order == 0) ? 0 : 'Free'|translate}}&nbsp;</div>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-7"></div>
+                                    <div class="col-md-3">+ {{'Service fee'|translate}} ({{vm.restaurant.sales_tax}} %)</div>
+                                    <div class="pull-right">{{vm.sales_tax | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}&nbsp;</div>
+                                </li>
+                            </ul>
+                            <div class="price-total text-right col-xs-12" ng-show="vm.carts.length"> <span class="h4 col-sm-9"> {{'Total'|translate}}</span> <span ng-show="vm.restaurant.delivery_charge !== '0'" class="price">{{(vm.is_allow_users_to_door_delivery_order == 0) ? vm.total-vm.restaurant.delivery_charge : vm.total   | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}&nbsp;</span>                                <span ng-show="vm.restaurant.delivery_charge === '0'" class="price">{{(vm.is_allow_users_to_door_delivery_order == 0) ? Free : vm.total   | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}&nbsp;</span>                                </div>
+                            <div class="section" ng-show="!vm.carts.length">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-7 text-center">
+                                            <h3><b>{{'Your basket is empty'|translate}}</b></h3>
+                                            <p>{{'Placeholder'|translate}} <a  href="restaurant/{{vm.restaurant.id}}/{{vm.restaurant.slug}}">{{'add items'|translate}}</a> {{'from menu or return to'|translate}} <a  ng-click="vm.redirectToSearchPage()"
+                                                    href="javascript:void(0)">{{'restaurant list'|translate}}</a> </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 order-details" ng-show="vm.carts.length">
+                <div class="panel">
+                    <div class="h3 text-capitalize"> {{'Order information'|translate}} </div>
+                    <form class="form-horizontal" role="form" name="reviewOrder" ng-submit="vm.checkout(reviewOrder)" novalidate>
+                        <div class="radio"> <label><input type="radio" class="input-md cur" ng-model="vm.is_allow_users_to_door_delivery_order"  value="1" name="vm.is_allow_users_to_door_delivery_order"> {{'Delivery'|translate}}  </label>
+                            <a href="" title="{{'Your order will be delivered to your address.'|translate}}"><i class="fa fa-info-circle"></i></a>
+                        </div> <span ng-show="vm.restaurant.is_allow_users_to_pickup_order === 1">                            
+							<div class="radio"> <label><input type="radio" class="input-md"  ng-model="vm.is_allow_users_to_door_delivery_order" value="0" name="vm.is_allow_users_to_door_delivery_order">{{'Pickup'|translate}} </label>
+                            <a href="" title="{{'You will pick up the order yourself at restaurant.'|translate}}"><i class="fa fa-info-circle"></i></a>
+                            </div>                            
+							<br>&nbsp;<b><i class="fa fa-map-marker"></i> &nbsp;
+                            <span ng-hide="vm.restaurant.address === null">{{vm.restaurant.address}}</span> <span ng-hide="vm.restaurant.address1 === '' || vm.restaurant.address1 === null">, {{vm.restaurant.address1}}</span> <span ng-hide="vm.restaurant.city === null">, {{vm.restaurant.city.name}}</span>                        <span ng-hide="vm.restaurant.state === null">, {{vm.restaurant.state.name}}</span> <span ng-hide="vm.restaurant.zip_code === null">, {{vm.restaurant.zip_code}}</span></b>
+                        </span>
+                        </span>
+                        <hr>
+                        <h4 ng-hide="vm.restaurant.is_closed === 1 && vm.restaurant.is_allow_users_to_preorder === 1">
+                            <div class="radio"> <label><input type="radio" class="input-md" ng-model="vm.asap_later" name="vm.asap_later" value="1">&nbsp;{{'As soon as possible'|translate}}</label></div>
+                        </h4>
+                        <div class="radio" ng-hide="vm.disable_pre_book === 1"> <label><input type="radio" ng-model="vm.asap_later" class="input-md" value="0">&nbsp;{{'Later'|translate}}
+							</label> </div>
+                        <div class="well-sm"></div>
+                        <div class="row" ng-show="vm.asap_later == 0">
+                            <div class="col-md-6">
+                                <div ng-class="{ 'has-error' : (reviewOrder.$submitted || reviewOrder.later_date.$touched) && (reviewOrder.later_date.$pristine || reviewOrder.later_date.$invalid) }"> <select name="vm.later_date" id="later_date" class="form-control" ng-model="vm.later_date" ng-options="date.value_date as date.display_date for date in vm.date_list" ng-required="true" ng-change="vm.getTime()">
+                                        <option value="">{{'Select a date'|translate}}</option>
+                                    </select>
+                                    <div class="help-block" ng-show="(reviewOrder.$submitted || reviewOrder.later_date.$touched) && (reviewOrder.later_date.$pristine || reviewOrder.later_date.$invalid) && (reviewOrder.later_date.$error.required)">{{'Required'|translate}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div ng-class="{ 'has-error' : (reviewOrder.$submitted || reviewOrder.later_time.$touched) && (reviewOrder.later_time.$pristine || reviewOrder.later_time.$invalid) }"> <select name="later_time" id="later_time" class="form-control" ng-model="vm.later_time" ng-options="time as time for time in vm.time_list" ng-required="true">
+                                        <option value="">{{'Select a time'|translate}}</option>
+                                    </select>
+                                    <div class="help-block" ng-show="(reviewOrder.$submitted || reviewOrder.later_time.$touched) && (reviewOrder.later_time.$pristine || reviewOrder.later_time.$invalid) && (reviewOrder.later_time.$error.required)">{{'Required'|translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <p><i>({{'If you want to add any comment, e.g. about allergies or delivery instructions, this is the right place'|translate}})</i></p>
+                        <div class="text-primary" ng-click="message.status = ! message.status"> <i class="fa fa-caret-right fa-lg" ng-class="{'fa-caret-down': message.status, 'fa-caret-right': !message.status}" aria-hidden="true"></i><a class="text-primary cur">&nbsp;&nbsp;{{'Add a message to your order'|translate}}</a> </div>
+                        <div class="mt10" ng-show="message.status"><textarea ng-model="vm.comment" rows="4" cols="30"></textarea> </div>
+                        <div class="well-sm"></div> <button type="submit" class="btn btn-block btn-lg btn-success text-center">{{'Checkout'|translate}}</button> </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
