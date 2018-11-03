@@ -1,6 +1,6 @@
 # OFOS
 
-OFOS is an open source classified platform that is capable to run classified sites similar to Just Eat clone script. It is written in AngularJS with REST API for high performance in mind.
+OFOS is an open source Online Food Ordering platform that is capable to run sites similar to Just Eat. It is written in AngularJS with REST API for high performance in mind.
 
 > This is project is part of Agriya Open Source efforts. OFOS was originally a paid script and was selling around 10000 Euros. It is now released under dual license (OSL 3.0 & Commercial) for open source community benefits.
 
@@ -9,7 +9,7 @@ OFOS is an open source classified platform that is capable to run classified sit
 
 ## Support
 
-OFOS classified platform is an open source project. Full commercial support (commercial license, customization, training, etc) are available through [OFOS classified platform support](https://www.agriya.com/products/just-eat-clone)
+OFOS Online Food Ordering platform is an open source project. Full commercial support (commercial license, customization, training, etc) are available through [OFOS platform support](https://www.agriya.com/products/just-eat-clone)
 
 Theming partner [CSSilize for design and HTML conversions](http://cssilize.com/)
 
